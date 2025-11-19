@@ -1,138 +1,158 @@
-.wrap {
-  padding: 120px 0 140px;
-}
-
-.inner {
+/* Section wrapper */
+.wrapper {
+  padding: 50px 0;
   position: relative;
 }
 
-/* --- POINT GRID --- */
-.points {
+.heading {
+  text-align: center;
+  margin-bottom: 70px;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Main timeline layout */
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.steps {
   display: flex;
   flex-direction: column;
-  gap: 140px;
+  gap: 90px;
 }
 
-.pointRow {
-  display: grid;
-  grid-template-columns: 1fr 80px 1fr;
-  align-items: center;
-  position: relative;
-  min-height: 140px;
-}
-
-/* Full-height timeline line */
-.timelineLine {
+/* Center vertical line container */
+.lineContainer {
   position: absolute;
-  top: 140;
+  top: 0;
   bottom: 0;
   left: 50%;
-  width: 6px;
-  transform: translateX(135%);
-  pointer-events: none;
-  z-index: 0;
+  width: 4px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  border-radius: 3px;
 }
 
-.timelineLine .lineTrack {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0,0,0,0);
-  border-radius: 6px;
-}
-
-.timelineLine .lineFill {
-  position: absolute;
-  top: 0;
+/* Line fill animates based on scroll */
+.lineFill {
   width: 100%;
   height: 100%;
   background: var(--color-primary);
   transform-origin: top;
   transform: scaleY(0);
-  border-radius: 6px;
-  z-index: 1;
+  border-radius: 3px;
 }
 
 
-/* --- SIDES --- */
-.side {
-  padding: 0 60px; /* perfect spacing from timeline */
+/* Each step */
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  position: relative;
 }
 
-/* text */
+/* Dot marker */
+.dot {
+  width: 18px;
+  height: 18px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  border: 4px solid var(--bg);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  box-shadow: none;
+}
+
+/* Left-aligned content */
+.left {
+  flex-direction: row-reverse;
+}
+
+.left .content {
+  text-align: right;
+  margin-right: calc(50% + 30px);
+}
+
+/* Right-aligned content */
+.right .content {
+  text-align: left;
+  margin-left: calc(50% + 30px);
+}
+
+/* Content box */
 .content {
   max-width: 420px;
 }
 
 .content h3 {
-  margin-bottom: 12px;
-  font-size: 1.4rem;
+  margin: 0 0 6px;
+  font-size: 24px;
+  color: var(--text);
 }
 
 .content p {
+  margin: 0 0 16px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.45;
 }
 
-/* --- VIDEO --- */
-.media {
-  max-width: 480px;
-}
-
-.videoCard {
-  background: var(--surface);
-  border-radius: 18px;
-  padding: 14px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(8px);
-}
-
-.videoCard video {
+/* Videos */
+.video {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 14px;
   display: block;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.28);
 }
 
-/* --- TIMELINE COLUMN --- */
-.centerColumn {
-  position: relative;
-  display: flex;
-  justify-content: center;
-}
+/* ----------------------------- */
+/*         MOBILE LAYOUT         */
+/* ----------------------------- */
 
-/* dot */
-.dot {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  border: 3px solid var(--color-primary);
-  background: var(--surface);
-  border-radius: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
-}
-
-/* --- MOBILE --- */
-@media (max-width: 900px) {
-  .pointRow {
-    grid-template-columns: 1fr;
-    gap: 24px;
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 80px 0;
   }
 
-  .side {
-    padding: 0 10px;
+  .heading {
+    font-size: 28px;
+    margin-bottom: 50px;
   }
 
-  .centerColumn {
-    left: 30px;
+  .steps {
+    gap: 70px;
   }
 
-  .lineWrap,
-  .dot {
+  /* Move vertical line left */
+  .lineContainer {
     left: 30px;
     transform: none;
+  }
+
+  .dot {
+    left: 30px;
+    transform: translateX(-50%);
+  }
+
+  /* Content becomes full width */
+  .left .content,
+  .right .content {
+    margin: 0 0 0 60px;
+    text-align: left;
+  }
+
+  .content {
+    max-width: 100%;
+  }
+
+  .video {
+    width: 100%;
   }
 }

@@ -1,26 +1,123 @@
-.hero { padding: 100px 0 60px } /* increased vertical spacing */
-.title { font-size: 48px; margin: 0 0 18px; }
-.subtitle { color: var(--muted); margin: 0 0 28px; max-width: 760px; margin-left: auto; margin-right: auto }
+/* Overall hero layout smaller + more breathable */
+.hero {
+  padding: 20px 0 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
 
+.top {
+  text-align: center;
+}
 
-.controls { display:flex; gap: 60px; justify-content:center; margin-bottom: 36px; padding: 10px 10px 0 0 }
-.control { cursor: pointer; border-radius: 14px; padding: 16px 20px; transition: transform .24s ease, box-shadow .22s ease; background: rgba(255,255,255,0.45); border: 1px solid var(--border); backdrop-filter: blur(6px); min-width: 200px }
-.controlInner { text-align: left }
-.controlTitle { font-weight: 600 }
-.controlSubtitle { font-size: 13px; color: var(--muted); margin-top: 6px }
+/* Smaller title */
+.title {
+  font-size: 38px;
+  margin: 0 0 12px;
+  font-weight: 700;
+}
 
+/* More compact subtitle */
+.subtitle {
+  color: var(--muted);
+  max-width: 660px;
+  margin: 0 auto 20px;
+  line-height: 1.45;
+}
 
-.control:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(0,0,0,0.08) }
-.active { box-shadow: 0 22px 48px rgba(88,169,66,0.12); border: 1px solid rgba(88,169,66,0.25) }
+/* CTA added */
+.cta {
+  margin: 16px auto 30px;
+  padding: 12px 26px;
+  border-radius: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: var(--color-primary-strong);
+  color: #fff;
+  transition: 0.25s ease;
+}
 
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(88, 169, 66, 0.4);
+}
 
-.mediaWrap { display:flex; justify-content:center; margin: 36px 0 22px }
-.heroImage { width: 760px; max-width: 100%; border-radius: 14px; box-shadow: 0 10px 36px rgba(11,11,11,0.06) }
+/* Tighter control layout */
+.controls {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  margin-bottom: 26px;
+  flex-wrap: wrap;
+}
 
+/* Smaller control cards */
+.control {
+  cursor: pointer;
+  border-radius: 12px;
+  padding: 12px 18px;
+  min-width: 160px;
+  transition: 0.25s ease;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(4px);
+}
 
-.smallText { color: var(--muted); margin-top: 16px; padding-top: 20px; }
+.control:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
 
+.active {
+  border: 1px solid rgba(88, 169, 66, 0.45);
+  box-shadow: 0 16px 36px rgba(88, 169, 66, 0.18);
+}
 
-@media (prefers-color-scheme: dark) {
-.control { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06) }
+.controlTitle {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.controlSubtitle {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* Image fits fully in view */
+.mediaWrap {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0 14px;
+}
+
+.heroImage {
+  width: 620px;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* small footer text */
+.smallText {
+  color: var(--muted);
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .heroImage {
+    width: 90%;
+    height: auto;
+  }
+
+  .controls {
+    gap: 16px;
+  }
 }

@@ -1,138 +1,117 @@
-"use client"
-import styles from "./Timeline.module.css"
-import { useScroll, motion, useTransform } from "framer-motion"
-import { useRef } from "react"
+"use client";
 
-const points = [
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import styles from "./Timeline.module.css";
+
+const steps = [
   {
-    title: "Connect Your Codebase",
-    desc: "Import from GitHub, GitLab, Azure DevOps, or Bitbucket.",
+    title: "Scan Your Repository",
+    text: "Harmony Engine quickly analyzes your entire codebase structure.",
     video: "/videos/sample-1.mp4",
+    poster: "/images/poster1.png"
   },
   {
-    title: "Explore & Understand",
-    desc: "See every component, dependency, and flow — clearly visualized.",
-    video: "/videos/sample-2.mp4",
+    title: "Generate AI Knowledge Maps",
+    text: "See how everything connects—modules, flows, services, logic.",
+    video: "/videos/sample-1.mp4",
+    poster: "/images/poster2.png"
   },
   {
-    title: "Build With Confidence",
-    desc: "Generate documentation, design features, and collaborate with your team.",
-    video: "/videos/sample-3.mp4",
+    title: "Ask Anything",
+    text: "Query legacy code like ChatGPT—with precise technical context.",
+    video: "/videos/sample-1.mp4",
+    poster: "/images/poster3.png"
   },
-]
+  {
+    title: "Ship With Confidence",
+    text: "Get PR insights, explanations, and architecture-level commentary.",
+    video: "/videos/sample-1.mp4",
+    poster: "/images/poster4.png"
+  },
+];
 
 export default function Timeline() {
-  const sectionRef = useRef(null)
+  const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start 85%", "end 20%"],
-  })
+    target: ref,
+    offset: ["start 20%", "end 80%"],
+  });
 
-  // dot glow transforms
-  const glows = points.map((_, idx) => {
-    const start = (idx / points.length) * 1.0
-    const end = ((idx + 0.2) / points.length) * 1.0
-    return useTransform(scrollYProgress, [start, end], [0, 1])
-  })
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 80,
+    damping: 20,
+  });
 
-  const scales = glows.map(g => useTransform(g, [0, 1], [1, 1.35]))
-  const boxShadows = glows.map(g =>
-    useTransform(g, v => {
-      const alpha = (0.55 * v).toFixed(2)
-      const blur = Math.round(25 * v)
-      return `0 0 ${blur}px rgba(88,169,66,${alpha})`
-    })
-  )
+  // line opacity to avoid flicker (remains 0 until progress > tiny threshold)
+  const lineOpacity = useTransform(smoothProgress, [0, 0.01, 0.02], [0, 0, 1]);
 
   return (
-    <section className={styles.wrap} ref={sectionRef}>
-        <div className={styles.inner + " container"}>
+    <section className={styles.wrapper} ref={ref}>
+      <h2 className={styles.heading}>How It Works</h2>
 
-            {/* TIMELINE LINE (fixed: spans the entire points container) */}
-            <div className={styles.timelineLine}>
-            <div className={styles.lineTrack}></div>
-            <motion.div
-                className={styles.lineFill}
-                style={{ scaleY: scrollYProgress }}
-            />
-            </div>
-
-            <div className={styles.points}>
-            {points.map((p, idx) => {
-                const even = idx % 2 === 0
-
-                return (
-                <div key={idx} className={styles.pointRow}>
-
-                    {/* LEFT SIDE */}
-                    <div className={styles.side}>
-                    {even ? (
-                        <motion.div
-                        className={styles.content}
-                        initial={{ opacity: 0, x: -40 }}
-                        whileInView={{ opacity: 1, x: 150 }}
-                        viewport={{ once: true }}
-                        >
-                        <h3>{p.title}</h3>
-                        <p>{p.desc}</p>
-                        </motion.div>
-                    ) : (
-                        <motion.div
-                        className={styles.media}
-                        initial={{ opacity: 0, x: -40 }}
-                        whileInView={{ opacity: 1, x: 90 }}
-                        viewport={{ once: true }}
-                        >
-                        <div className={styles.videoCard}>
-                            <video src={p.video} autoPlay loop muted playsInline />
-                        </div>
-                        </motion.div>
-                    )}
-                    </div>
-
-                    {/* CENTER COLUMN WITH DOT */}
-                    <div className={styles.centerColumn}>
-                    <motion.div
-                        className={styles.dot}
-                        style={{
-                        scale: scales[idx],
-                        boxShadow: boxShadows[idx],
-                        }}
-                    />
-                    </div>
-
-                    {/* RIGHT SIDE */}
-                    <div className={styles.side}>
-                    {!even ? (
-                        <motion.div
-                        className={styles.content}
-                        initial={{ opacity: 0, x: 40 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        >
-                        <h3>{p.title}</h3>
-                        <p>{p.desc}</p>
-                        </motion.div>
-                    ) : (
-                        <motion.div
-                        className={styles.media}
-                        initial={{ opacity: 0, x: 40 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        >
-                        <div className={styles.videoCard}>
-                            <video src={p.video} autoPlay loop muted playsInline />
-                        </div>
-                        </motion.div>
-                    )}
-                    </div>
-                </div>
-                )
-            })}
-            </div>
+      <div className={styles.timeline}>
+        {/* Vertical center line */}
+        <div className={styles.lineContainer}>
+          <motion.div
+            className={styles.lineFill}
+            style={{
+              scaleY: smoothProgress,
+              opacity: lineOpacity
+            }}
+          />
         </div>
-    </section>
 
-  )
+        <div className={styles.steps}>
+          {steps.map((step, idx) => {
+            const offset = idx % 2 === 0 ? -30 : 30;
+
+            // compute when the fill "reaches" this dot
+            // using a threshold based on step index (approximate)
+            const threshold = (idx + 0.5) / steps.length;
+
+            // create a smooth transition for glow around the threshold
+            const glow = useTransform(
+              smoothProgress,
+              [Math.max(0, threshold - 0.03), threshold, Math.min(1, threshold + 0.03)],
+              ["none", "0 0 16px rgba(88,169,66,0.75)", "0 0 16px rgba(88,169,66,0.75)"]
+            );
+
+            return (
+              <motion.div
+                key={idx}
+                className={`${styles.step} ${idx % 2 === 0 ? styles.left : styles.right}`}
+                initial={{ opacity: 0, x: offset }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-20% 0px" }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+              >
+                <motion.div
+                  className={styles.dot}
+                  style={{ boxShadow: glow }}
+                />
+
+                <div className={styles.content}>
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+
+                  <video
+                    className={styles.video}
+                    src={step.video}
+                    poster={step.poster}
+                    preload="metadata"
+                    muted
+                    playsInline
+                    autoPlay
+                    loop
+                  />
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 }

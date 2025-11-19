@@ -1,0 +1,12 @@
+:root {
+    /* Dark-only theme */
+    --bg: #0E0F0F;
+    --surface: #1A1C1A;
+    --border: #3A3D3A;
+    --text: #ECECEC;
+    --muted: #A1A1A1;
+
+    --color-primary: #58A942;
+    --color-primary-strong: #008000;
+    --color-primary-tint: #1f2a1f;
+}

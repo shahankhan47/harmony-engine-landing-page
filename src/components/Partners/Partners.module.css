@@ -1,29 +1,99 @@
-.wrap { padding: 40px 0 } /* keep the increased vertical spacing */
-.caption { text-align:center; color: var(--muted); margin-bottom: 18px }
-.marquee { overflow: hidden; position: relative; }
+.wrap {
+  padding: 40px 0;
+}
 
-/* The track contains two copies of the logo sequence (you already duplicate in JSX) */
-/* Animate from 0% -> -50% so the second copy continues seamlessly */
+.caption {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+.marquee {
+  position: relative;
+  overflow: hidden;
+  height: 90px;
+}
+
+/* Fades – using #0E0F0F with opacity instead of black */
+.fadeLeft,
+.fadeRight {
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.fadeLeft {
+  left: 0;
+  background: linear-gradient(to right, rgba(14,15,15,0.82), transparent);
+}
+
+.fadeRight {
+  right: 0;
+  background: linear-gradient(to left, rgba(14,15,15,0.82), transparent);
+}
+
 .track {
   display: flex;
-  gap: 90px; /* spacing between logos */
+  gap: 90px;
   align-items: center;
-  padding: 10px 0;
-  /* translate from 0 -> -50% (seamless loop when logos are duplicated) */
-  animation: marqueeLoop 5s linear infinite;
+  animation: scroll 5s linear infinite;
   will-change: transform;
 }
 
-/* Individual logo sizing */
-.logo { width: 160px; opacity: .95; flex: 0 0 auto; }
-.logo img { width: 100%; height: auto; filter: grayscale(0.02); display: block; }
+/* CRITICAL: animate exactly ONE SET WIDTH */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(var(--loop-distance));
+  }
+}
 
-/* Keyframes: translateX from 0 -> -50% (works with duplicated content inside .track) */
-@keyframes marqueeLoop {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
+.logo {
+  flex: 0 0 auto;
+  width: 160px;
+  opacity: 0.85;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(60%);
+}
+
+.logo:hover {
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+.logo:hover img {
+  filter: grayscale(0%);
 }
 
 @media (prefers-color-scheme: dark) {
-  .logo img { filter: brightness(1.2) }
+  .logo img {
+    filter: brightness(1.15) grayscale(60%);
+  }
+  .logo:hover img {
+    filter: brightness(1.25) grayscale(0%);
+  }
+}
+
+@media (max-width: 768px) {
+  .logo {
+    width: 110px;
+  }
+  .track {
+    gap: 50px;
+  }
+  .fadeLeft,
+  .fadeRight {
+    width: 70px;
+  }
 }
