@@ -1,0 +1,138 @@
+.wrap {
+  padding: 120px 0 140px;
+}
+
+.inner {
+  position: relative;
+}
+
+/* --- POINT GRID --- */
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: 140px;
+}
+
+.pointRow {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  align-items: center;
+  position: relative;
+  min-height: 140px;
+}
+
+/* Full-height timeline line */
+.timelineLine {
+  position: absolute;
+  top: 140;
+  bottom: 0;
+  left: 50%;
+  width: 6px;
+  transform: translateX(135%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.timelineLine .lineTrack {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0);
+  border-radius: 6px;
+}
+
+.timelineLine .lineFill {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-primary);
+  transform-origin: top;
+  transform: scaleY(0);
+  border-radius: 6px;
+  z-index: 1;
+}
+
+
+/* --- SIDES --- */
+.side {
+  padding: 0 60px; /* perfect spacing from timeline */
+}
+
+/* text */
+.content {
+  max-width: 420px;
+}
+
+.content h3 {
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+}
+
+.content p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* --- VIDEO --- */
+.media {
+  max-width: 480px;
+}
+
+.videoCard {
+  background: var(--surface);
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+}
+
+.videoCard video {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+
+/* --- TIMELINE COLUMN --- */
+.centerColumn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/* dot */
+.dot {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--color-primary);
+  background: var(--surface);
+  border-radius: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+/* --- MOBILE --- */
+@media (max-width: 900px) {
+  .pointRow {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .side {
+    padding: 0 10px;
+  }
+
+  .centerColumn {
+    left: 30px;
+  }
+
+  .lineWrap,
+  .dot {
+    left: 30px;
+    transform: none;
+  }
+}

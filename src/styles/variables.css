@@ -1,0 +1,37 @@
+:root {
+    /* Light mode primary colors (default forced to light) */
+    --color-primary: #007f00;
+    --color-primary-strong: #008000;
+    --color-primary-tint: #F0F9EE;
+
+
+    --bg: #F8F9FA;
+    --surface: #F1F1F1;
+    --border: #B7B6B6;
+    --text: #0b0b0b;
+    --muted: #6B7280;
+}
+
+
+/* Dark theme variables are available under the .dark class on <html> or <body> */
+.dark {
+    --bg: #0E0F0F;
+    --surface: #1A1C1A;
+    --border: #3A3D3A;
+    --text: #ECECEC;
+    --muted: #A1A1A1;
+    --color-primary: #58A942;
+}
+
+
+/* Dark theme variables (prefers-color-scheme fallback) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0E0F0F;
+        --surface: #1A1C1A;
+        --border: #3A3D3A;
+        --text: #ECECEC;
+        --muted: #A1A1A1;
+        --color-primary: #58A942;
+    }
+}

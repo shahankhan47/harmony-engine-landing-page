@@ -1,0 +1,26 @@
+.hero { padding: 100px 0 60px } /* increased vertical spacing */
+.title { font-size: 48px; margin: 0 0 18px; }
+.subtitle { color: var(--muted); margin: 0 0 28px; max-width: 760px; margin-left: auto; margin-right: auto }
+
+
+.controls { display:flex; gap: 60px; justify-content:center; margin-bottom: 36px; padding: 10px 10px 0 0 }
+.control { cursor: pointer; border-radius: 14px; padding: 16px 20px; transition: transform .24s ease, box-shadow .22s ease; background: rgba(255,255,255,0.45); border: 1px solid var(--border); backdrop-filter: blur(6px); min-width: 200px }
+.controlInner { text-align: left }
+.controlTitle { font-weight: 600 }
+.controlSubtitle { font-size: 13px; color: var(--muted); margin-top: 6px }
+
+
+.control:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(0,0,0,0.08) }
+.active { box-shadow: 0 22px 48px rgba(88,169,66,0.12); border: 1px solid rgba(88,169,66,0.25) }
+
+
+.mediaWrap { display:flex; justify-content:center; margin: 36px 0 22px }
+.heroImage { width: 760px; max-width: 100%; border-radius: 14px; box-shadow: 0 10px 36px rgba(11,11,11,0.06) }
+
+
+.smallText { color: var(--muted); margin-top: 16px; padding-top: 20px; }
+
+
+@media (prefers-color-scheme: dark) {
+.control { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06) }
+}

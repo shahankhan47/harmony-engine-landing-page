@@ -1,0 +1,29 @@
+.wrap { padding: 40px 0 } /* keep the increased vertical spacing */
+.caption { text-align:center; color: var(--muted); margin-bottom: 18px }
+.marquee { overflow: hidden; position: relative; }
+
+/* The track contains two copies of the logo sequence (you already duplicate in JSX) */
+/* Animate from 0% -> -50% so the second copy continues seamlessly */
+.track {
+  display: flex;
+  gap: 90px; /* spacing between logos */
+  align-items: center;
+  padding: 10px 0;
+  /* translate from 0 -> -50% (seamless loop when logos are duplicated) */
+  animation: marqueeLoop 5s linear infinite;
+  will-change: transform;
+}
+
+/* Individual logo sizing */
+.logo { width: 160px; opacity: .95; flex: 0 0 auto; }
+.logo img { width: 100%; height: auto; filter: grayscale(0.02); display: block; }
+
+/* Keyframes: translateX from 0 -> -50% (works with duplicated content inside .track) */
+@keyframes marqueeLoop {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo img { filter: brightness(1.2) }
+}
