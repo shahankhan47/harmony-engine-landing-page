@@ -1,6 +1,7 @@
 "use client"
 import styles from './Header.module.css'
 import { useState, useEffect } from 'react'
+import Link from "next/link";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -29,7 +30,9 @@ export default function Header() {
             <a href="#about">About</a>
             <a href="#pricing">Pricing</a>
             <a href="#contact">Contact</a>
-            <button className={styles.cta}>Get Started</button>
+            <Link href="/get-started" className={styles.ctaLink}>
+              <button className={styles.cta}>Get Started</button>
+            </Link>
           </nav>
         </div>
       </div>

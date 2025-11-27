@@ -3,6 +3,7 @@
 import { useState } from "react";
 import styles from "./HeroSection.module.css";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 const items = [
   {
@@ -45,7 +46,9 @@ export default function HeroSection() {
           you ask anything — from bug fixes to new features.
         </p>
 
-        <button className={styles.cta}>Get Started</button>
+        <Link href="/get-started">
+          <button className={styles.cta}>Get Started</button>
+        </Link>
 
         <div className={styles.controls}>
           {items.map((it) => (

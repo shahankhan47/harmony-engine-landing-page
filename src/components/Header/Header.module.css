@@ -41,7 +41,7 @@
 }
 
 .navLeft a,
-.navRight a {
+.navRight a:not(.ctaLink) {
   position: relative;
   color: var(--muted);
   font-size: 14px;
@@ -51,7 +51,7 @@
 
 /* 👇 Smooth underline hover */
 .navLeft a::after,
-.navRight a::after {
+.navRight a:not(.ctaLink)::after {
   content: "";
   position: absolute;
   left: 0;
@@ -68,7 +68,7 @@
 }
 
 .navLeft a:hover::after,
-.navRight a:hover::after {
+.navRight a:not(.ctaLink):hover::after {
   width: 100%;
 }
 
@@ -101,6 +101,12 @@
 
 .cta:active {
   transform: scale(0.97);
+}
+
+.ctaLink {
+  all: unset;             /* removes inherited link styles */
+  display: inline-block;  /* behaves like normal wrapper */
+  cursor: pointer;
 }
 
 /* Dark mode support */
