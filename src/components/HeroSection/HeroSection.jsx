@@ -36,8 +36,38 @@ export default function HeroSection() {
   const [active, setActive] = useState(items[0].id);
   const activeItem = items.find((i) => i.id === active);
 
+  // 🔥 mouse data only for background
+  const [cursor, setCursor] = useState({ x: 50, y: 50, angle: 0 });
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+    setCursor((prev) => {
+      const dx = x - prev.x;
+      const dy = y - prev.y;
+      // angle of movement → ray direction
+      const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+      return { x, y, angle };
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setCursor({ x: 50, y: 50, angle: 0 });
+  };
+
   return (
-    <div className={styles.hero}>
+    <div
+      className={styles.hero}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        "--mouse-x": `${cursor.x}%`,
+        "--mouse-y": `${cursor.y}%`,
+        "--ray-angle": `${cursor.angle}deg`,
+      }}
+    >
       <div className={styles.top}>
         <h1 className={styles.title}>Understand Your Entire Codebase in Seconds</h1>
 
