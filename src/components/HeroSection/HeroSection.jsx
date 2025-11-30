@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./HeroSection.module.css";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
@@ -36,26 +36,56 @@ export default function HeroSection() {
   const [active, setActive] = useState(items[0].id);
   const activeItem = items.find((i) => i.id === active);
 
-  // 🔥 mouse data only for background
+  // This is what actually drives the CSS vars (SMOOTH)
   const [cursor, setCursor] = useState({ x: 50, y: 50, angle: 0 });
+
+  // This is the raw mouse target (JUMPY, but we don't use it directly)
+  const targetRef = useRef({ x: 50, y: 50, angle: 0 });
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
 
-    setCursor((prev) => {
-      const dx = x - prev.x;
-      const dy = y - prev.y;
-      // angle of movement → ray direction
-      const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-      return { x, y, angle };
-    });
+    const prev = targetRef.current;
+    const dx = x - prev.x;
+    const dy = y - prev.y;
+    const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+    targetRef.current = { x, y, angle };
   };
 
   const handleMouseLeave = () => {
-    setCursor({ x: 50, y: 50, angle: 0 });
+    targetRef.current = { x: 50, y: 50, angle: 0 };
   };
+
+  // 🔥 Smooth animation loop: lerp cursor → targetRef.current
+  useEffect(() => {
+    let frameId;
+
+    const smoothStep = () => {
+      setCursor((prev) => {
+        const target = targetRef.current;
+        const lerp = 0.12; // smaller = smoother / slower
+
+        const x = prev.x + (target.x - prev.x) * lerp;
+        const y = prev.y + (target.y - prev.y) * lerp;
+
+        // shortest path for angles
+        let deltaAngle = target.angle - prev.angle;
+        if (deltaAngle > 180) deltaAngle -= 360;
+        if (deltaAngle < -180) deltaAngle += 360;
+        const angle = prev.angle + deltaAngle * lerp;
+
+        return { x, y, angle };
+      });
+
+      frameId = requestAnimationFrame(smoothStep);
+    };
+
+    frameId = requestAnimationFrame(smoothStep);
+    return () => cancelAnimationFrame(frameId);
+  }, []);
 
   return (
     <div
