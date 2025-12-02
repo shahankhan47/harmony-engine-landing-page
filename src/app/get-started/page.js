@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import styles from "./page.module.css";
+import RHELayout from "../../components/HE/RHELayout";
 
 export default function GetStartedPage() {
   const [open, setOpen] = useState(false);
@@ -12,13 +13,12 @@ export default function GetStartedPage() {
   };
 
   const closeModal = () => {
+    // we'll gracefully close the underlying modal via animation
     setIsClosing(true);
-
-    // Wait for closing animation to finish (300ms)
     setTimeout(() => {
       setOpen(false);
       setIsClosing(false);
-    }, 300);
+    }, 280);
   };
 
   return (
@@ -82,29 +82,19 @@ export default function GetStartedPage() {
         </p>
       </section>
 
-      {/* MODAL WITH ANIMATION */}
+      {/* MODAL WITH RHE (Step 1) */}
       {open && (
         <div
-          className={`${styles.modalOverlay} ${
-            isClosing ? styles.fadeOut : styles.fadeIn
-          }`}
+          className={`${styles.modalOverlay} ${isClosing ? styles.fadeOut : styles.fadeIn}`}
           onClick={closeModal}
         >
           <div
-            className={`${styles.modal} ${
-              isClosing ? styles.modalClose : styles.modalOpen
-            }`}
+            className={`${styles.modal} ${isClosing ? styles.modalClose : styles.modalOpen}`}
             onClick={(e) => e.stopPropagation()}
+            style={{ padding: 0 }}
           >
-            <div className={styles.modalHeader}>
-              <button className={styles.closeBtn} onClick={closeModal}>
-                Close
-              </button>
-            </div>
-
-            <div className={styles.modalContent}>
-              <em>RHE Interactive UI will be rendered here</em>
-            </div>
+            {/* RHE is self-contained and includes its own close button */}
+            <RHELayout onClose={closeModal} />
           </div>
         </div>
       )}
