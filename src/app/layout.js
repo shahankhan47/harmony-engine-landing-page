@@ -6,7 +6,7 @@ import Footer from '../components/Footer/Footer'
 
 export const metadata = {
   title: 'Harmony Engine',
-  description: 'Understand your legacy codebase with AI',
+  description: 'Understand legacy codebase with AI',
 }
 
 
