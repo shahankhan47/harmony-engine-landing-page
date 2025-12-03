@@ -6,41 +6,49 @@ import MiddlePane from "./MiddlePane";
 import RightPane from "./RightPane";
 import styles from "./RHE.module.css";
 
-export default function RHELayout({ onClose }) {
-  // leftMode: "summary" | "files"
+export default function RHELayout({ onClose, projectFiles, loadingFiles }) {
   const [leftMode, setLeftMode] = useState("summary");
-  // open content from left pane (type: 'summary'|'file', id, title, content)
   const [activeItem, setActiveItem] = useState(null);
+  const filesData = projectFiles || [];
 
   const openSummary = (summary) => {
     setActiveItem({ type: "summary", ...summary });
   };
 
-  const openFile = (file) => {
-    setActiveItem({ type: "file", ...file });
-  };
+  // Open a file from in-memory dataset
+  const openFile = (fileMeta) => {
+    const f = filesData.find((x) => x.id === fileMeta.id);
+    if (!f) return;
 
-  const closeActive = () => setActiveItem(null);
+    setActiveItem({
+      type: "file",
+      id: f.id,
+      title: f.file_name,
+      summary: f.summary,
+      content: f.content,
+    });
+  };
 
   return (
     <div className={styles.rheShell}>
-      <TopBar
-        leftMode={leftMode}
-        setLeftMode={setLeftMode}
-        onClose={onClose}
-      />
+      <TopBar leftMode={leftMode} setLeftMode={setLeftMode} onClose={onClose} />
 
       <div className={styles.workspace}>
         <div className={styles.left}>
           <LeftPane
             mode={leftMode}
             onOpenSummary={openSummary}
+            loadingFiles={loadingFiles}
             onOpenFile={openFile}
+            files={filesData}            // ⭐ Pass cleaned list into LeftPane
           />
         </div>
 
         <div className={styles.middle}>
-          <MiddlePane activeItem={activeItem} onCloseActive={closeActive} />
+          <MiddlePane
+            activeItem={activeItem}
+            onCloseActive={() => setActiveItem(null)}
+          />
         </div>
 
         <div className={styles.right}>

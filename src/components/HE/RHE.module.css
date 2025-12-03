@@ -325,3 +325,39 @@
 .diagramModalTitle { font-weight: 700; }
 .diagramModalContent { padding: 18px; display: flex; flex: 1; align-items: center; justify-content: center; }
 .diagramLarge { text-align: center; padding: 16px; border-radius: 10px; background: rgba(255,255,255,0.01); }
+
+
+.viewerContent h1,
+.viewerContent h2,
+.viewerContent h3 {
+  margin-top: 22px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.viewerContent p {
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.viewerContent ul {
+  padding-left: 20px;
+  margin-bottom: 14px;
+}
+
+.viewerContent li {
+  margin-bottom: 6px;
+}
+
+.viewerContent code {
+  background: rgba(255,255,255,0.08);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.viewerContent pre code {
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+  overflow-x: auto;
+}

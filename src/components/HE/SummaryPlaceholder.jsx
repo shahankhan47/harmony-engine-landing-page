@@ -1,41 +1,59 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./RHE.module.css";
 
-const summaries = [
-  { id: "exec", title: "Executive Summary", excerpt: "Project overview and goals..." },
-  { id: "req", title: "Requirements and Setup Details", excerpt: "Dependencies, setup..." },
-  { id: "personas", title: "User Personas", excerpt: "Primary users and roles..." },
-  { id: "stories", title: "User Stories", excerpt: "Key user journeys..." },
-  { id: "modules", title: "Key Business Modules", excerpt: "Major modules..." },
-  { id: "stack", title: "Current Tech Stack", excerpt: "Tools and libs..." },
-  { id: "recstack", title: "Recommended Stable Tech Stack", excerpt: "Suggestions..." },
-];
+import { marked } from "marked";
+import DOMPurify from "dompurify";
+
+// Import the raw stringify JSON text
+import rawSummary from "../../../data/test/project-summary.json";
 
 export default function SummaryPlaceholder({ onOpen }) {
+  const [summaryData, setSummaryData] = useState({});
+
+  useEffect(() => {
+    try {
+      const parsed = JSON.parse(rawSummary);
+      setSummaryData(parsed);
+    } catch (err) {
+      console.error("Failed to parse project-summary.json", err);
+    }
+  }, []);
+
+  const entries = Object.entries(summaryData);
+
+  const convertMarkdown = (md) => {
+    const html = marked(md, { breaks: true });
+    return DOMPurify.sanitize(html);
+  };
+
   return (
     <div className={styles.summaryList}>
       <h3 className={styles.panelTitle}>Project Summary</h3>
+
       <div className={styles.summaryItems}>
-        {summaries.map((s) => (
-          <button
-            key={s.id}
-            className={styles.summaryItem}
-            onClick={() =>
-              onOpen({
-                id: s.id,
-                title: s.title,
-                content:
-                  `<h2>${s.title}</h2><p>${s.excerpt}</p><p>Sample content for ${s.title}. Replace with real data.</p>`,
-              })
-            }
-          >
-            <div className={styles.dot} />
-            <div className={styles.summaryMeta}>
-              <div className={styles.summaryTitle}>{s.title}</div>
-            </div>
-          </button>
-        ))}
+        {entries.map(([title, mdContent]) => {
+          const htmlContent = convertMarkdown(mdContent);
+
+          return (
+            <button
+              key={title}
+              className={styles.summaryItem}
+              onClick={() =>
+                onOpen({
+                  id: title,
+                  title,
+                  content: htmlContent, // send sanitized HTML
+                })
+              }
+            >
+              <div className={styles.dot} />
+              <div className={styles.summaryMeta}>
+                <div className={styles.summaryTitle}>{title}</div>
+              </div>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

@@ -1,11 +1,47 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import RHELayout from "../../components/HE/RHELayout";
+
+// Env
+const API_BASE_URL = process.env.NEXT_PUBLIC_HE_API_URL;
+const PROJECT_ID = process.env.NEXT_PUBLIC_HE_PROJECT_ID;
+const API_KEY = process.env.NEXT_PUBLIC_HE_API_KEY;
 
 export default function GetStartedPage() {
   const [open, setOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [projectFiles, setProjectFiles] = useState(null);
+  const [loadingFiles, setLoadingFiles] = useState(true);
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await fetch(`${API_BASE_URL}/projects/${PROJECT_ID}/files`, {
+          headers: {
+            "X-API-Key": API_KEY
+          }
+        });
+
+        const json = await res.json();
+        const cleaned = json.files.map((f) => ({
+          ...f,
+          file_path: f.file_path.replace(
+            /^\/?tmp\/[^/]+\/extracted_files\//,
+            ""
+          )
+        }));
+
+        setProjectFiles(cleaned);
+      } catch (e) {
+        console.error("Failed to load project files", e);
+      } finally {
+        setLoadingFiles(false);
+      }
+    }
+
+    load();
+  }, []);
 
   const openModal = () => {
     setIsClosing(false);
@@ -93,8 +129,7 @@ export default function GetStartedPage() {
             onClick={(e) => e.stopPropagation()}
             style={{ padding: 0 }}
           >
-            {/* RHE is self-contained and includes its own close button */}
-            <RHELayout onClose={closeModal} />
+            <RHELayout onClose={closeModal} projectFiles={projectFiles} loadingFiles={loadingFiles} />
           </div>
         </div>
       )}
