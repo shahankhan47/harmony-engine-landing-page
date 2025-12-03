@@ -361,3 +361,74 @@
   border-radius: 8px;
   overflow-x: auto;
 }
+
+/* Viewer overlay (keeps chat mounted) */
+.viewerOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+}
+
+/* ============================
+   Chat bubble improvements
+   - avoid overflow
+   - ensure code blocks scroll inside bubble
+   - rendering markdown inside bubbles
+   ============================ */
+
+/* Chat bubble fixes */
+.chatBubbleUser,
+.chatBubbleAssistant {
+  max-width: 75%;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  box-sizing: border-box;
+}
+
+.chatBubbleUser {
+  align-self: flex-end;
+  background: rgba(88,169,66,0.30);
+  padding: 12px 14px;
+  border-radius: 12px;
+}
+
+.chatBubbleAssistant {
+  align-self: flex-start;
+  background: rgba(255,255,255,0.08);
+  padding: 12px 14px;
+  border-radius: 12px;
+}
+
+.chatBubbleAssistant pre,
+.chatBubbleUser pre {
+  background: rgba(0,0,0,0.18);
+  padding: 10px;
+  border-radius: 8px;
+  overflow-x: auto;
+  max-width: 100%;
+  white-space: pre;
+  margin-bottom: 0;
+}
+
+/* loading dots */
+.loadingDots {
+  display: inline-flex;
+  gap: 6px;
+}
+.loadingDots span {
+  width: 8px;
+  height: 8px;
+  background: var(--muted);
+  border-radius: 50%;
+  animation: loading-bounce 1s infinite ease-in-out;
+}
+.loadingDots span:nth-child(2) { animation-delay: 0.15s; }
+.loadingDots span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes loading-bounce {
+  0% { opacity: 0.25; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-4px); }
+  100% { opacity: 0.25; transform: translateY(0); }
+}
+
