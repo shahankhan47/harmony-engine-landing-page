@@ -29,6 +29,12 @@ jobs:
 
       - name: Build Next.js
         run: npm run build
+        env:
+          NEXT_PUBLIC_HE_API_URL: ${{ secrets.NEXT_PUBLIC_HE_API_URL }}
+          NEXT_PUBLIC_HE_WS_URL: ${{ secrets.NEXT_PUBLIC_HE_WS_URL }}
+          NEXT_PUBLIC_HE_API_KEY: ${{ secrets.NEXT_PUBLIC_HE_API_KEY }}
+          NEXT_PUBLIC_HE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_HE_PROJECT_ID }}
+          NEXT_PUBLIC_HE_EMAIL: ${{ secrets.NEXT_PUBLIC_HE_EMAIL }}
 
       # ✅ Oryx is skipped entirely
       - name: Deploy to Azure Static Web Apps
