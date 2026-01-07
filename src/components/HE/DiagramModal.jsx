@@ -6,7 +6,7 @@ import mermaid from "mermaid";
 import panzoom from "panzoom";
 import { saveAs } from "file-saver";
 
-import rawDiagrams from "../../../data/test/project-diagrams.json";
+import data from "../../../data/test/project.json";
 
 export default function DiagramModal({ diag, onClose }) {
   const [svgCode, setSvgCode] = useState("");
@@ -16,7 +16,7 @@ export default function DiagramModal({ diag, onClose }) {
   const svgContainerRef = useRef(null);
   const panzoomInstance = useRef(null);
 
-  const diagramsData = JSON.parse(rawDiagrams);
+  const diagramsData = data.Diagrams
   const diagramEntry = diagramsData[diag.title];
 
   // Detect variants

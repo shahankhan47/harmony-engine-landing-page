@@ -6,14 +6,14 @@ import { marked } from "marked";
 import DOMPurify from "dompurify";
 
 // Import the raw stringify JSON text
-import rawSummary from "../../../data/test/project-summary.json";
+import data from "../../../data/test/project.json";
 
 export default function SummaryPlaceholder({ onOpen }) {
   const [summaryData, setSummaryData] = useState({});
 
   useEffect(() => {
     try {
-      const parsed = JSON.parse(rawSummary);
+      const parsed = data.Summary;
       setSummaryData(parsed);
     } catch (err) {
       console.error("Failed to parse project-summary.json", err);
