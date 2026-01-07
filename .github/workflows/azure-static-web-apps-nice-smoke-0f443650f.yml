@@ -53,6 +53,7 @@ jobs:
           app_location: "/"        # App source code path
           api_location: ""         # API source code path - optional
           output_location: ""      # Built app content directory - optional
+          node_version: 20
           github_id_token: ${{ steps.idtoken.outputs.result }}
 
   close_pull_request_job:
