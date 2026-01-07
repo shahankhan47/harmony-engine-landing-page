@@ -30,10 +30,6 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
-      # If using static export
-      - name: Export Next.js
-        run: npm run export
-
       # ✅ Oryx is skipped entirely
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
