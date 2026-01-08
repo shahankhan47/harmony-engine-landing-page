@@ -60,6 +60,9 @@ function ChatShell() {
 
   const [input, setInput] = useState("");
   const [waiting, setWaiting] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);  // Tracks if recognition is active
+  const recognitionRef = useRef(null);                    // Holds SpeechRecognition instance
+
 
   const chatRef = useRef(null);
   useAutoScroll(chatRef, [messages, waiting]);
@@ -68,6 +71,62 @@ function ChatShell() {
   useEffect(() => {
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
   }, [messages]);
+
+  useEffect(() => {
+    if (!("webkitSpeechRecognition" in window || "SpeechRecognition" in window)) {
+      console.warn("Speech Recognition API not supported in this browser");
+      return;
+    }
+    
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+
+    recognition.continuous = false; // Stop automatically after speech ends
+    recognition.interimResults = true; // Get partial (interim) results for live input
+    recognition.lang = "en-US";  // You can adjust the language code as needed
+
+    recognition.onstart = () => {
+      setIsRecording(true);
+    };
+
+    recognition.onerror = (event) => {
+      console.error("Speech recognition error", event.error);
+      setIsRecording(false);
+    };
+
+    recognition.onend = () => {
+      setIsRecording(false);
+    };
+
+    recognition.onresult = (event) => {
+      let interimTranscript = "";
+      let finalTranscript = "";
+      
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript;
+        } else {
+          interimTranscript += transcript;
+        }
+      }
+      // Prefer final transcript if available, else show interim transcript
+      setInput((prevInput) => {
+        // Combine original input with interim/final transcription so far
+        // This helps if user typed before starting speech
+        return finalTranscript || interimTranscript || prevInput;
+      });
+    };
+
+    recognitionRef.current = recognition;
+
+    // Cleanup on unmount
+    return () => {
+      recognition.stop();
+    };
+  }, []);
+
 
   /** SEND MESSAGE → open WS only now, close after completion */
   const sendMessage = () => {
@@ -138,6 +197,24 @@ function ChatShell() {
     }
   };
 
+  const startRecognition = () => {
+    if (recognitionRef.current && !isRecording) {
+      try {
+        recognitionRef.current.start();
+      } catch (e) {
+        // Avoid "recognition already started" error on quick re-click
+        console.warn("Recognition start error:", e);
+      }
+    }
+  };
+
+  const stopRecognition = () => {
+    if (recognitionRef.current && isRecording) {
+      recognitionRef.current.stop();
+    }
+  };
+
+
   return (
     <div className={styles.chatShell}>
       {/* header */}
@@ -177,6 +254,15 @@ function ChatShell() {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
         />
+        <button
+          className={styles.micBtn}
+          onClick={isRecording ? stopRecognition : startRecognition}
+          title={isRecording ? "Stop recording" : "Start voice input"}
+          aria-pressed={isRecording}
+          type="button"
+        >
+          {isRecording ? "🎙️" : "🎤"}
+        </button>
         <button className={styles.sendBtn} onClick={sendMessage}>
           Send
         </button>
