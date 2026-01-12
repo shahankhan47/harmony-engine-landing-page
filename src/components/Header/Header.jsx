@@ -31,7 +31,7 @@ export default function Header() {
             <a href="#pricing">Pricing</a>
             <a href="#contact">Contact</a>
             <Link href="/get-started" className={styles.ctaLink}>
-              <button className={styles.cta}>Get Started</button>
+              <button className={styles.cta}>Upload your project</button>
             </Link>
           </nav>
         </div>

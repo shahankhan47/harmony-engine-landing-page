@@ -6,26 +6,26 @@ import styles from "./Timeline.module.css";
 
 const steps = [
   {
-    title: "Scan Your Repository",
-    text: "Harmony Engine quickly analyzes your entire codebase structure.",
+    title: "Connect Your Codebase",
+    text: "Securely link your Git repo or upload a snapshot. HarmonyEngine ingests your source code and structure.",
     video: "/videos/sample-1.mp4",
     poster: "/images/poster1.png"
   },
   {
-    title: "Generate AI Knowledge Maps",
-    text: "See how everything connects—modules, flows, services, logic.",
+    title: "Map the System",
+    text: "AI auto‑discovers modules, services, and data flows, so you can see how everything fits together.",
     video: "/videos/sample-1.mp4",
     poster: "/images/poster2.png"
   },
   {
-    title: "Ask Anything",
-    text: "Query legacy code like ChatGPT—with precise technical context.",
+    title: "Ask What Matters",
+    text: "Type questions in plain English— HarmonyEngine answers using your actual code.",
     video: "/videos/sample-1.mp4",
     poster: "/images/poster3.png"
   },
   {
-    title: "Ship With Confidence",
-    text: "Get PR insights, explanations, and architecture-level commentary.",
+    title: "Stay on Top of Changes",
+    text: "It summarizes code changes and pull requests, highlighting impact and areas to double‑check.",
     video: "/videos/sample-1.mp4",
     poster: "/images/poster4.png"
   },
