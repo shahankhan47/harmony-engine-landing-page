@@ -16,7 +16,7 @@ export default function Partners() {
   return (
     <div className={styles.wrap}>
       <div className={styles.caption}>
-        Trusted by engineering leaders and innovation teams.
+        Harmony reads your codebase and answers these questions in plain language - so leaders don’t need to read code.
       </div>
 
       <div className={styles.marquee}>
