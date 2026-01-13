@@ -8,28 +8,40 @@ import Link from "next/link";
 const items = [
   {
     id: "analysis",
-    title: "AI Code Analysis",
-    subtitle: "Instant structure. Instant clarity.",
+    title: "Visibility",
+    subtitle: "See the system as it really is",
     img: "/images/hero-1.png",
+    subtext: "Faster Due Diligence. Fewer surprises",
+    bullets: [
+      "Instant architecture map ( Services, Modules, Dependencies)",
+      "Highlights fragile areas, Upgrade paths and bottlenecks",
+      "Creates a shared system overview for leadership and Vendors"
+    ]
   },
   {
     id: "chat",
-    title: "AI Chat for Your Code",
-    subtitle: "Ask anything. Build anything.",
+    title: "Allignment",
+    subtitle: "Give every stakeholder the same source of truth",
     img: "/images/hero-2.png",
+    subtext: "Less tribal knowledge. Faster onboarding.",
+    bullets: [
+      "Ask Plain English Questions and get consistent answers",
+      "Turn answers into living documentation",
+      "Preserve knowledge when teams change or vendors rotate"
+    ]
   },
   {
     id: "reports",
-    title: "Knowledge Reports",
-    subtitle: "Your codebase, documented.",
+    title: "Control",
+    subtitle: "Understand impact before it ships",
     img: "/images/hero-3.png",
-  },
-  {
-    id: "prs",
-    title: "Pull Request Insights",
-    subtitle: "Business-level context for every PR.",
-    img: "/images/hero-4.png",
-  },
+    subtext: "Lower delivery risk. Better governance",
+    bullets: [
+      "Executive summaries of pull requests",
+      "What changed, why it matters and why it might break",
+      "Reports you can share with audits, leaderships and customers"
+    ]
+  }
 ];
 
 export default function HeroSection() {
@@ -99,15 +111,14 @@ export default function HeroSection() {
       }}
     >
       <div className={styles.top}>
-        <h1 className={styles.title}>Understand Your Entire Codebase in Seconds</h1>
+        <h1 className={styles.title}>Turn your codebase into clarity you can run the business on</h1>
 
         <p className={styles.subtitle}>
-          Harmony Engine analyzes legacy systems, uncovers hidden logic, and lets
-          you ask anything — from bug fixes to new features.
+          HarmonyEngine analyzes your repo and produces an executive summary, architecture diagrams, and searchable answers—so you can make decisions, reduce risk, and onboard faster.
         </p>
 
         <Link href="/get-started">
-          <button className={styles.cta}>Get Started</button>
+          <button className={styles.cta}>Explore a sample project</button>
         </Link>
 
         <div className={styles.controls}>
@@ -130,22 +141,42 @@ export default function HeroSection() {
 
         <div className={styles.mediaWrap}>
           <AnimatePresence mode="wait">
-            <motion.img
-              key={activeItem.img}
-              src={activeItem.img}
-              alt={activeItem.title}
+            <motion.div
+              key={activeItem.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.25 }}
-              className={styles.heroImage}
-            />
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className={styles.mediaContent}
+            >
+              {/* 🔹 BULLET LIST */}
+              <ul className={styles.bullets}>
+                {activeItem.bullets.map((bullet, i) => (
+                  <motion.li
+                    key={bullet}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                  >
+                    {bullet}
+                  </motion.li>
+                ))}
+              </ul>
+
+              {/* 🔹 IMAGE */}
+              <motion.img
+                src={activeItem.img}
+                alt={activeItem.title}
+                className={styles.heroImage}
+              />
+
+              {/* 🔹 SUBTEXT */}
+              <p className={styles.smallText}>
+                {activeItem.subtext}
+              </p>
+            </motion.div>
           </AnimatePresence>
         </div>
-
-        <p className={styles.smallText}>
-          Trusted by teams modernizing large, complex, or undocumented systems.
-        </p>
       </div>
     </div>
   );
