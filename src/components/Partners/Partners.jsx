@@ -2,21 +2,20 @@
 
 import styles from "./Partners.module.css";
 
-const logos = [
-  "/images/logo-1.svg",
-  "/images/logo-2.svg",
-  "/images/logo-3.svg",
-  "/images/logo-4.svg",
-  "/images/logo-5.svg",
-  "/images/logo-6.svg",
-  "/images/logo-7.svg",
+const partners = [
+  "Which parts of the codebase run on legacy tech?",
+  "How tangled is our current architecture?",
+  "Where is the logic for pricing?",
+  "How long would it take for my team to implement this architecture?",
+  "Why am I getting this error?",
+  "Why are my customers not able to see their purchase history ?",
 ];
 
 export default function Partners() {
   return (
     <div className={styles.wrap}>
       <div className={styles.caption}>
-        Harmony reads your codebase and answers these questions in plain language - so leaders don’t need to read code.
+        Harmony reads your codebase and answers these questions in plain language – so leaders don’t need to read code.
       </div>
 
       <div className={styles.marquee}>
@@ -24,10 +23,9 @@ export default function Partners() {
         <div className={styles.fadeRight}></div>
 
         <div className={styles.track}>
-          {/* 7 logos x 2 = 14 cells */}
-          {logos.concat(logos).map((src, idx) => (
+          {partners.concat(partners).map((name, idx) => (
             <div className={styles.logo} key={idx}>
-              <img src={src} alt={`logo-${(idx % logos.length) + 1}`} />
+              <span className={styles.text}>{name}</span>
             </div>
           ))}
         </div>

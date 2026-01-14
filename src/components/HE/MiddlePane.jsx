@@ -7,10 +7,7 @@ import DOMPurify from "dompurify";
 
 // envs
 const WS_URL = process.env.NEXT_PUBLIC_HE_WS_URL;
-const PROJECT_ID = process.env.NEXT_PUBLIC_HE_PROJECT_ID;
-const EMAIL = process.env.NEXT_PUBLIC_HE_EMAIL;
-
-const STORAGE_KEY = "rhe_chat_messages_v1";
+const EMAIL = "prince47khan@gmail.com";
 
 /** Markdown → Safe HTML */
 function md(htmlText) {
@@ -30,12 +27,14 @@ function useAutoScroll(ref, deps) {
   }, deps);
 }
 
-export default function MiddlePane({ activeItem, onCloseActive }) {
+export default function MiddlePane({ activeItem, onCloseActive, projectId }) {
+  const STORAGE_KEY = `rhe_chat_messages_${projectId}`;
+
   return (
     <div className={styles.middlePane}>
       {/* Restore correct original behavior */}
       {!activeItem ? (
-        <ChatShell />
+        <ChatShell projectId={projectId} storageKey={STORAGE_KEY} />
       ) : (
         <Viewer item={activeItem} onClose={onCloseActive} />
       )}
@@ -47,10 +46,10 @@ export default function MiddlePane({ activeItem, onCloseActive }) {
    CHAT SHELL
    ======================================================================= */
 
-function ChatShell() {
+function ChatShell({ projectId, storageKey }) {
   const [messages, setMessages] = useState(() => {
     try {
-      const raw = sessionStorage.getItem(STORAGE_KEY);
+      const raw = sessionStorage.getItem(storageKey);
       if (!raw) return [];
       return JSON.parse(raw);
     } catch {
@@ -66,11 +65,15 @@ function ChatShell() {
 
   // persist messages
   useEffect(() => {
-    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    sessionStorage.setItem(storageKey, JSON.stringify(messages));
   }, [messages]);
 
   /** SEND MESSAGE → open WS only now, close after completion */
   const sendMessage = () => {
+    if (!projectId) {
+      console.warn("No projectId set for chat");
+      return;
+    }
     const userText = input.trim();
     if (!userText) return;
 
@@ -94,7 +97,7 @@ function ChatShell() {
         ws.send(
           JSON.stringify({
             user_question: userText,
-            project_id: PROJECT_ID,
+            project_id: projectId,
             email: EMAIL,
             checklistAssistant: false,
             uploaded_files: [],

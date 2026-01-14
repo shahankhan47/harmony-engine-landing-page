@@ -172,32 +172,128 @@
   font-size: 13px;
 }
 
-.bullets {
-  margin: 0 0 24px 0;
-  padding: 0;
-  list-style: none;
+/* ───────── Cards Section ───────── */
+
+.cardsSection {
+  margin-top: 32px;
+}
+
+/* 3 cards inside viewport */
+.cardsRow {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+/* Card base */
+.card {
+  width: 28%;
+  aspect-ratio: 1 / 1;
+  padding: 24px;
+
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 
   display: flex;
-  align-items: center;
   flex-direction: column;
-  gap: 10px;
 
-  max-width: 520px;
-  margin-left: auto;
-  margin-right: auto;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    background-color 0.35s ease;
 }
 
-.bullets li {
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  background: rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+
+/* Title at top */
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 27px; /* EXACT spacing requested */
+  text-align: center;
+}
+
+/* Bullet text block */
+.cardBullets {
+  margin-bottom: 18px;
+}
+
+.cardBullets ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardBullets li {
   position: relative;
-  padding-left: 20px;
+  padding-left: 16px;
 
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.5;
-  font-weight: 400;
-
   color: rgba(255, 255, 255, 0.75);
-  text-align: left;
 }
+
+/* Image (1:1) */
+.cardImageWrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  margin: 16px 0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Subtext at bottom */
+.cardSubtext {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: auto;
+}
+
+/* Arrows (inactive) */
+.arrows {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.arrows button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+
+  font-size: 20px;
+  background: var(--color-primary-strong);
+  color: #fff;
+
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 
 /* Mobile adjustments */
 @media (max-width: 768px) {

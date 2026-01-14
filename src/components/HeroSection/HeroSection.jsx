@@ -45,6 +45,7 @@ const items = [
 ];
 
 export default function HeroSection() {
+  const [index, setIndex] = useState(0);
   const [active, setActive] = useState(items[0].id);
   const activeItem = items.find((i) => i.id === active);
 
@@ -99,6 +100,10 @@ export default function HeroSection() {
     return () => cancelAnimationFrame(frameId);
   }, []);
 
+  const prev = () => setIndex((i) => Math.max(i - 1, 0));
+  const next = () =>
+    setIndex((i) => Math.min(i + 1, items.length - 1));
+
   return (
     <div
       className={styles.hero}
@@ -121,61 +126,42 @@ export default function HeroSection() {
           <button className={styles.cta}>Explore a sample project</button>
         </Link>
 
-        <div className={styles.controls}>
-          {items.map((it) => (
-            <div
-              key={it.id}
-              onMouseEnter={() => setActive(it.id)}
-              onClick={() => setActive(it.id)}
-              className={`${styles.control} ${
-                active === it.id ? styles.active : ""
-              }`}
-            >
-              <div className={styles.controlInner}>
-                <div className={styles.controlTitle}>{it.title}</div>
-                <div className={styles.controlSubtitle}>{it.subtitle}</div>
+        <div className={styles.cardsSection}>
+          <div className={styles.cardsRow}>
+            {items.map((item) => (
+              <div key={item.id} className={styles.card}>
+                {/* Title */}
+                <h3 className={styles.cardTitle}>{item.title}</h3>
+
+                {/* Text block (bullets) */}
+                <div className={styles.cardBullets}>
+                  <ul>
+                    {item.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Image */}
+                <div className={styles.cardImageWrap}>
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className={styles.cardImage}
+                  />
+                </div>
+
+                {/* Subtext */}
+                <p className={styles.cardSubtext}>{item.subtext}</p>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className={styles.mediaWrap}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeItem.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className={styles.mediaContent}
-            >
-              {/* 🔹 BULLET LIST */}
-              <ul className={styles.bullets}>
-                {activeItem.bullets.map((bullet, i) => (
-                  <motion.li
-                    key={bullet}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                  >
-                    {bullet}
-                  </motion.li>
-                ))}
-              </ul>
-
-              {/* 🔹 IMAGE */}
-              <motion.img
-                src={activeItem.img}
-                alt={activeItem.title}
-                className={styles.heroImage}
-              />
-
-              {/* 🔹 SUBTEXT */}
-              <p className={styles.smallText}>
-                {activeItem.subtext}
-              </p>
-            </motion.div>
-          </AnimatePresence>
+          {/* Arrows (inactive) */}
+          {/* <div className={styles.arrows}>
+            <button disabled>←</button>
+            <button disabled>→</button>
+          </div> */}
         </div>
       </div>
     </div>

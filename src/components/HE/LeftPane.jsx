@@ -4,7 +4,7 @@ import SummaryPlaceholder from "./SummaryPlaceholder";
 import FileTreePlaceholder from "./FileTreePlaceholder";
 import styles from "./RHE.module.css";
 
-export default function LeftPane({ mode, onOpenSummary, onOpenFile, files, loadingFiles }) {
+export default function LeftPane({ mode, onOpenSummary, onOpenFile, files, loadingFiles, projectMeta }) {
   if (loadingFiles) {
     return (
       <div className={styles.leftPane}>
@@ -16,7 +16,7 @@ export default function LeftPane({ mode, onOpenSummary, onOpenFile, files, loadi
   return (
     <div className={styles.leftPane + " " + styles.noScrollbar}>
       {mode === "summary" ? (
-        <SummaryPlaceholder onOpen={onOpenSummary} />
+        <SummaryPlaceholder onOpen={onOpenSummary} summary={projectMeta?.Summary} />
       ) : (
         <FileTreePlaceholder onOpenFile={onOpenFile} files={files} />
       )}

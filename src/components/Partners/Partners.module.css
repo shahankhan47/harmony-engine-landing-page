@@ -40,7 +40,7 @@
 /* 14 cells wide: 7 logos x 2, each 250px (160 + 90) */
 .track {
   display: flex;
-  width: calc(250px * 14);
+  width: calc(490px * 12);
   will-change: transform;
   animation: partners-scroll 20s linear infinite;
 }
@@ -48,18 +48,35 @@
 /* Each logo cell: 160px logo + 90px gap */
 .logo {
   flex: 0 0 auto;
-  width: 160px;
-  margin-right: 90px;
+  width: 400px;          /* FIXED — do not change */
+  margin-right: 90px;    /* FIXED — do not change */
   opacity: 0.85;
   transition: opacity 0.25s ease, transform 0.25s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.logo img {
-  width: 100%;
-  height: auto;
-  display: block;
-  filter: grayscale(60%);
+.logo:hover {
+  opacity: 1;
+  transform: scale(1.08);
 }
+
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text, #e5e7eb);
+  white-space: nowrap;
+}
+
 
 /* Keyframes:
    - total track width = 3500px
@@ -71,29 +88,6 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-1750px);
+    transform: translateX(-2940px);
   }
 }
-
-/* Hover niceties (optional) */
-.logo:hover {
-  opacity: 1;
-  transform: scale(1.06);
-}
-
-.logo:hover img {
-  filter: grayscale(0%);
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo img {
-    filter: brightness(1.15) grayscale(60%);
-  }
-  .logo:hover img {
-    filter: brightness(1.25) grayscale(0%);
-  }
-}
-
-/* You can add responsive styling later;
-   for now, keep these exact numbers to verify
-   the loop is perfectly seamless. */

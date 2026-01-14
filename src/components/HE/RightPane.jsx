@@ -9,7 +9,7 @@ const diagrams = [
   { id: "personas", title: "User Personas" },
 ];
 
-export default function RightPane() {
+export default function RightPane({diagramsData}) {
   const [openDiag, setOpenDiag] = useState(null);
 
   return (
@@ -33,7 +33,7 @@ export default function RightPane() {
         <div className={styles.placeholderBox}>Nothing to show here</div>
       </div>
 
-      {openDiag && <DiagramModal diag={openDiag} onClose={() => setOpenDiag(null)} />}
+      {openDiag && <DiagramModal diag={openDiag} onClose={() => setOpenDiag(null)} diagramsData={diagramsData} />}
     </div>
   );
 }

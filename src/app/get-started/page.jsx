@@ -1,27 +1,71 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import RHELayout from "../../components/HE/RHELayout";
+import projectData from "../../../data/test/project.json";
 
 // Env
 const API_BASE_URL = process.env.NEXT_PUBLIC_HE_API_URL;
-const PROJECT_ID = process.env.NEXT_PUBLIC_HE_PROJECT_ID;
 const API_KEY = process.env.NEXT_PUBLIC_HE_API_KEY;
+
+// Demo projects (content can be changed later)
+const DEMO_PROJECTS = [
+  {
+    id: "tinygpu",
+    title: "Tiny-GPU",
+    image: "/images/demo-1.png",
+    projectId: "241ed538-3bb9-4350-8746-953394d0d768",
+    description:
+      "A minimal GPU design in Verilog to learn how GPUs work from the ground up"
+  },
+  {
+    id: "medusa",
+    title: "Medusa-Ecommerce",
+    image: "/images/demo-2.png",
+    projectId: "2a332cf9-ead0-4aa3-87f4-9a214068a22f",
+    description:
+      "Medusa is a commerce platform with a built-in framework for customization that allows you to build custom commerce applications without reinventing core commerce logic."
+  },
+  {
+    id: "twitter",
+    title: "Twitter-The Alogirthm",
+    image: "/images/demo-3.png",
+    projectId: "590dfdf9-5fd3-4e10-b44a-abefa46047e9",
+    description:
+      "X's Recommendation Algorithm is a set of services and jobs that are responsible for serving feeds of posts and other content across all X product surfaces (e.g. For You Timeline, Search, Explore, Notifications)."
+  },
+  {
+    id: "apollo",
+    title: "Apollo-11 Guidance Computer",
+    image: "/images/demo-4.png",
+    projectId: "4751acd8-3289-4812-bd7c-00966171fccc",
+    description:
+      "Original Apollo 11 guidance computer (AGC) source code for Command Module (Comanche055) and Lunar Module (Luminary099)."
+  }
+];
 
 export default function GetStartedPage() {
   const [open, setOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [projectFiles, setProjectFiles] = useState(null);
-  const [loadingFiles, setLoadingFiles] = useState(true);
 
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [projectFiles, setProjectFiles] = useState(null);
+  const [loadingFiles, setLoadingFiles] = useState(false);
+
+  // Fetch files when project changes
   useEffect(() => {
-    async function load() {
+    if (!selectedProject) return;
+
+    async function loadFiles() {
+      setLoadingFiles(true);
       try {
-        const res = await fetch(`${API_BASE_URL}/projects/${PROJECT_ID}/files`, {
-          headers: {
-            "X-API-Key": API_KEY
+        const res = await fetch(
+          `${API_BASE_URL}/projects/${selectedProject.projectId}/files`,
+          {
+            headers: { "X-API-Key": API_KEY }
           }
-        });
+        );
 
         const json = await res.json();
         const cleaned = json.files.map((f) => ({
@@ -40,96 +84,79 @@ export default function GetStartedPage() {
       }
     }
 
-    load();
-  }, []);
+    loadFiles();
+  }, [selectedProject]);
 
-  const openModal = () => {
+  const openModal = (project) => {
+    setSelectedProject(project);
     setIsClosing(false);
     setOpen(true);
   };
 
   const closeModal = () => {
-    // we'll gracefully close the underlying modal via animation
     setIsClosing(true);
     setTimeout(() => {
       setOpen(false);
+      setSelectedProject(null);
+      setProjectFiles(null);
       setIsClosing(false);
     }, 280);
   };
 
   return (
     <div className={styles.wrapper}>
-      {/* SECTION 1 — INTRO */}
       <section className={styles.section}>
-        <h1 className={styles.title}>Welcome to Harmony Engine</h1>
-
+        <h1 className={styles.title}>Get Started</h1>
         <p className={styles.text}>
-          Harmony Engine analyzes legacy systems, uncovers hidden logic, creates
-          architecture maps, and allows AI-powered understanding of any part of
-          your codebase within seconds.
+          Select a project below to explore Harmony Engine.
         </p>
       </section>
 
-      {/* SECTION 2 — BENEFITS */}
-      <section className={styles.section}>
-        <h2 className={styles.subtitle}>What You Can Do</h2>
-
-        <ul className={styles.list}>
-          <li>Instantly understand large codebases.</li>
-          <li>Navigate files and architecture visually.</li>
-          <li>Chat with your entire codebase in natural language.</li>
-          <li>Generate knowledge reports and module explanations.</li>
-          <li>Explore deep logic paths and dependencies.</li>
-        </ul>
+      <section className={styles.projectsSection}>
+        <div className={styles.projectsGrid}>
+          {DEMO_PROJECTS.map((project) => (
+            <button
+              key={project.id}
+              className={styles.projectCard}
+              onClick={() => openModal(project)}
+            >
+              <img
+                src={project.image}
+                alt={project.title}
+                className={styles.projectImage}
+              />
+              <div className={styles.projectOverlay}>
+                <h3 className={styles.projectTitle}>{project.title}</h3>
+                <p className={styles.projectDescription}>
+                  {project.description}
+                </p>
+              </div>
+            </button>
+          ))}
+        </div>
       </section>
 
-      {/* SECTION 3 — ABOUT RHE */}
-      <section className={styles.section}>
-        <h2 className={styles.subtitle}>Interactive UI — RHE</h2>
-
-        <p className={styles.text}>
-          The Reconstruction Harmony Environment (RHE) is the interactive
-          interface that visualizes your code, architecture, and logic while
-          enabling AI-powered exploration.
-        </p>
-
-        <p className={styles.text}>
-          Click below to open a live demo window. The full UI will appear in a
-          modal popup.
-        </p>
-      </section>
-
-      {/* CTA BUTTON */}
-      <div className={styles.center}>
-        <button className={styles.demoBtn} onClick={openModal}>
-          Try Live Demo
-        </button>
-      </div>
-
-      {/* NEXT STEPS */}
-      <section className={styles.section}>
-        <h2 className={styles.subtitle}>What’s Next?</h2>
-
-        <p className={styles.text}>
-          In the next phases we’ll implement the full RHE experience — including
-          the sidebar, code navigator, AI assistant chat, architecture explorer,
-          and interactive flow diagrams. Once complete, it will load directly
-          inside the modal you just opened.
-        </p>
-      </section>
-
-      {/* MODAL WITH RHE (Step 1) */}
-      {open && (
+      {open && selectedProject && (
         <div
-          className={`${styles.modalOverlay} ${isClosing ? styles.fadeOut : styles.fadeIn}`}
+          className={`${styles.modalOverlay} ${
+            isClosing ? styles.fadeOut : styles.fadeIn
+          }`}
           onClick={closeModal}
         >
           <div
-            className={`${styles.modal} ${isClosing ? styles.modalClose : styles.modalOpen}`}
+            className={`${styles.modal} ${
+              isClosing ? styles.modalClose : styles.modalOpen
+            }`}
             onClick={(e) => e.stopPropagation()}
             style={{ padding: 0 }}
           >
-            <RHELayout onClose={closeModal} projectFiles={projectFiles} loadingFiles={loadingFiles} />
+            <RHELayout
+              onClose={closeModal}
+              projectFiles={projectFiles}
+              loadingFiles={loadingFiles}
+              projectMeta={projectData[selectedProject.id]}
+              projectId={selectedProject.projectId}
+            />
           </div>
         </div>
       )}

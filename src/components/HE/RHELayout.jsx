@@ -6,7 +6,7 @@ import MiddlePane from "./MiddlePane";
 import RightPane from "./RightPane";
 import styles from "./RHE.module.css";
 
-export default function RHELayout({ onClose, projectFiles, loadingFiles }) {
+export default function RHELayout({ onClose, projectFiles, loadingFiles, projectMeta, projectId }) {
   const [leftMode, setLeftMode] = useState("summary");
   const [activeItem, setActiveItem] = useState(null);
   const filesData = projectFiles || [];
@@ -40,7 +40,8 @@ export default function RHELayout({ onClose, projectFiles, loadingFiles }) {
             onOpenSummary={openSummary}
             loadingFiles={loadingFiles}
             onOpenFile={openFile}
-            files={filesData}            // ⭐ Pass cleaned list into LeftPane
+            files={filesData}
+            projectMeta={projectMeta}
           />
         </div>
 
@@ -48,11 +49,12 @@ export default function RHELayout({ onClose, projectFiles, loadingFiles }) {
           <MiddlePane
             activeItem={activeItem}
             onCloseActive={() => setActiveItem(null)}
+            projectId={projectId}
           />
         </div>
 
         <div className={styles.right}>
-          <RightPane />
+          <RightPane diagramsData={projectMeta?.Diagrams} />
         </div>
       </div>
     </div>
