@@ -26,7 +26,7 @@ const steps = [
   {
     title: "Stay on Top of Changes",
     text: "It summarizes code changes and pull requests, highlighting impact and areas to double‑check.",
-    video: "/videos/sample-1.mp4",
+    video: "/videos/sample-4.mp4",
     poster: "/images/poster4.png"
   },
 ];
