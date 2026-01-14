@@ -6,7 +6,7 @@ import MiddlePane from "./MiddlePane";
 import RightPane from "./RightPane";
 import styles from "./RHE.module.css";
 
-export default function RHELayout({ onClose, projectFiles, loadingFiles, projectMeta, projectId }) {
+export default function RHELayout({ onClose, projectFiles, loadingFiles, projectMeta, projectId, projectTitle }) {
   const [leftMode, setLeftMode] = useState("summary");
   const [activeItem, setActiveItem] = useState(null);
   const filesData = projectFiles || [];
@@ -31,7 +31,7 @@ export default function RHELayout({ onClose, projectFiles, loadingFiles, project
 
   return (
     <div className={styles.rheShell}>
-      <TopBar leftMode={leftMode} setLeftMode={setLeftMode} onClose={onClose} />
+      <TopBar leftMode={leftMode} setLeftMode={setLeftMode} onClose={onClose} projectTitle={projectTitle} />
 
       <div className={styles.workspace}>
         <div className={styles.left}>

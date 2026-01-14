@@ -156,6 +156,7 @@ export default function GetStartedPage() {
               loadingFiles={loadingFiles}
               projectMeta={projectData[selectedProject.id]}
               projectId={selectedProject.projectId}
+              projectTitle={selectedProject.title}
             />
           </div>
         </div>

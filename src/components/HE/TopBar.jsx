@@ -2,12 +2,12 @@
 import React from "react";
 import styles from "./RHE.module.css";
 
-export default function TopBar({ leftMode, setLeftMode, onClose }) {
+export default function TopBar({ leftMode, setLeftMode, onClose, projectTitle }) {
   return (
     <div className={styles.topbar}>
       <div className={styles.topLeft}>
         <img src="/images/logo.png" alt="Harmony" className={styles.logo} />
-        <div className={styles.brand}>Harmony Engine — RHE</div>
+        <div className={styles.brand}>{projectTitle}</div>
       </div>
 
       <div className={styles.topRight}>
