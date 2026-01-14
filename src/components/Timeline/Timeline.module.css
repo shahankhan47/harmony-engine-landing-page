@@ -104,12 +104,22 @@
   line-height: 1.45;
 }
 
+.videoWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9; /* choose what fits your design */
+  overflow: hidden;
+  border-radius: 14px;
+  background: #000; /* optional, but safe */
+}
+
+
 /* Videos */
 .video {
   width: 100%;
-  border-radius: 14px;
+  height: 100%;
+  object-fit: cover;
   display: block;
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.28);
+  /* box-shadow: 0 6px 22px rgba(0, 0, 0, 0.28); */
 }
 
 /* ----------------------------- */

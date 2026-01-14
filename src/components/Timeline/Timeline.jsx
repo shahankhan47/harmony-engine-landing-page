@@ -14,13 +14,13 @@ const steps = [
   {
     title: "Map the System",
     text: "AI auto‑discovers modules, services, and data flows, so you can see how everything fits together.",
-    video: "/videos/sample-1.mp4",
+    video: "/videos/sample-2.mp4",
     poster: "/images/poster2.png"
   },
   {
     title: "Ask What Matters",
     text: "Type questions in plain English— HarmonyEngine answers using your actual code.",
-    video: "/videos/sample-1.mp4",
+    video: "/videos/sample-3.mp4",
     poster: "/images/poster3.png"
   },
   {
@@ -96,16 +96,17 @@ export default function Timeline() {
                   <h3>{step.title}</h3>
                   <p>{step.text}</p>
 
-                  <video
-                    className={styles.video}
-                    src={step.video}
-                    poster={step.poster}
-                    preload="metadata"
-                    muted
-                    playsInline
-                    autoPlay
-                    loop
-                  />
+                  <div className={styles.videoWrapper}>
+                    <video
+                      className={styles.video}
+                      src={step.video}
+                      poster={step.poster}
+                      muted
+                      playsInline
+                      autoPlay
+                      loop
+                    />
+                  </div>
                 </div>
               </motion.div>
             );

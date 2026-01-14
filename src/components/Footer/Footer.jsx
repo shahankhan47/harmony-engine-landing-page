@@ -19,15 +19,15 @@ export default function Footer() {
             <div className={styles.column}>
               <h4 className={styles.heading}>Quick Links</h4>
               <a href="/">Home</a>
-              <a href="/how-it-works">How It Works</a>
-              <a href="/success-stories">Success Stories</a>
+              <a href="/">How It Works</a>
+              <a href="/">Success Stories</a>
             </div>
 
             <div className={styles.column}>
               <h4 className={styles.heading}>Support</h4>
-              <a href="/faq">FAQ</a>
-              <a href="/privacy">Privacy Policy</a>
-              <a href="/terms">Terms of Service</a>
+              <a href="/">FAQ</a>
+              <a href="/">Privacy Policy</a>
+              <a href="/">Terms of Service</a>
             </div>
           </div>
         </div>
