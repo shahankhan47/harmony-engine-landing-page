@@ -16,15 +16,14 @@
   pointer-events: none;
 
   /* BIG hexagon tile with spacing + rounded corners, very faint */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cpath d='M80 20 L180 20 L230 130 L180 240 L80 240 L30 130 Z' fill='none' stroke='rgba(0,255,120,0.18)' stroke-width='1.8' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-size: 260px 260px;
+  background-image: url("../../../public/svg/hexagon.svg");
+  background-size: 460px 460px;
   background-repeat: repeat;
-  opacity: 0.06; /* 🌫️ barely visible */
+  opacity: 0;
   mix-blend-mode: normal;
 }
 
-
-/* 💚 mouse-following glow ONLY on hex outlines */
+/* 💚 enhanced mouse-following glow on hex outlines */
 .hero::after {
   content: "";
   position: absolute;
@@ -32,44 +31,69 @@
   pointer-events: none;
   opacity: 0;
 
-  /* short ray segment oriented with mouse movement
-     and positioned near cursor (one edge at a time) */
-  background-image: linear-gradient(
-    var(--ray-angle, 0deg),
-    transparent 0%,
-    transparent 40%,
-    rgba(0, 255, 120, 0.95) 50%,
-    transparent 60%,
-    transparent 100%
+  /* dual-ray for thickness + direction inertia */
+  background-image:
+    linear-gradient(
+    0deg,
+    transparent 10%,
+    transparent 10%,
+    rgba(0, 255, 120, 0.45) 30%,
+    transparent 10%,
+    transparent 10%
+  ),
+  radial-gradient(
+    circle at center,
+    rgba(0, 255, 120, 0.25) 0%,
+    rgba(0, 255, 120, 0.15) 25%,
+    transparent 55%
   );
 
-  /* the ray tile is local, not full-screen */
-  background-size: 260px 260px;
+  /* localized ray tile with slight inertia */
+  background-size: 240px 240px;
   background-repeat: no-repeat;
-  background-position: var(--mouse-x, 50%) var(--mouse-y, 50%);
+  background-position:
+    calc(var(--mouse-x, 50%) * 1)
+    calc(var(--mouse-y, 50%) * 1);
 
-  /* mask to big hex grid so only edges glow */
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cpath d='M80 20 L180 20 L230 130 L180 240 L80 240 L30 130 Z' fill='none' stroke='white' stroke-width='2.2' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E");
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cpath d='M80 20 L180 20 L230 130 L180 240 L80 240 L30 130 Z' fill='none' stroke='white' stroke-width='2.2' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E");
-  -webkit-mask-size: 260px 260px;
-  mask-size: 260px 260px;
+  /* mask to hex grid so only edges glow */
+  -webkit-mask-image: url("../../../public/svg/hexagon.svg");
+  mask-image: url("../../../public/svg/hexagon.svg");
+  -webkit-mask-size: 460px 460px;
+  mask-size: 460px 460px;
   -webkit-mask-repeat: repeat;
   mask-repeat: repeat;
 
   mix-blend-mode: screen;
+
   filter:
-    drop-shadow(0 0 8px rgba(0, 255, 120, 0.9))
+    drop-shadow(0 0 8px rgba(0, 255, 120, 0.5))
     drop-shadow(0 0 18px rgba(0, 255, 120, 0.5));
 
-  transition: opacity 0.12s ease-out;
+  transition:
+    opacity 0.35s cubic-bezier(0.1, 0.1, 0.1, 0.1),
+    filter 0.25s ease-out;
 }
 
-/* only on hover do we actually see the ray */
+/* activate glow with breathing + scanning motion */
 .hero:hover::after {
   opacity: 0.6;
+  animation:
+    glow-breathe 2.8s ease-in-out infinite,
+    ray-scan 1.6s linear infinite;
 }
 
+/* subtle breathing keeps light alive */
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.65; }
+}
 
+/* ray length modulation feels like edge probing */
+@keyframes ray-scan {
+  0%   { background-size: 220px 220px; }
+  50%  { background-size: 280px 280px; }
+  100% { background-size: 220px 220px; }
+}
 
 .top {
   text-align: center;

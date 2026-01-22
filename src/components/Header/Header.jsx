@@ -17,7 +17,7 @@ export default function Header() {
       <div className={styles.inner + ' container'}>
         <div className={styles.left}>
           <div className={styles.logo}>
-            <img src="/images/logo.png" alt="Harmony Engine Logo" />
+            <img src="/svg/logo-black.svg" alt="Harmony Engine Logo" />
           </div>
 
           <nav className={styles.navLeft}>

@@ -16,6 +16,14 @@
 
 .title {
   margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.titleIcon {
+  height: 40px;
+  flex-shrink: 0;
 }
 
 .description {
