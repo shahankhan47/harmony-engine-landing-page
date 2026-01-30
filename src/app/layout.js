@@ -8,6 +8,10 @@ import Footer from '../components/Footer/Footer'
 export const metadata = {
   title: 'Harmony Engine',
   description: 'Understand legacy codebase with AI',
+  icons: {
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+  },
 }
 
 const isProd = process.env.NODE_ENV === "production";
