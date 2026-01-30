@@ -16,10 +16,9 @@ export default function Footer() {
               />
             </h3>
             <p className={styles.text}>
-              Harmony Engine simplifies codebase exploration by analyzing your existing code, generating summary PDFs, 
-              and producing detailed C4 and Mermaid diagrams. With built-in codebase chat functionality, 
-              developers can interact with their code, ask questions, and get insights in real time. 
-              Harmony Engine empowers you to understand, visualize, and engage with your codebase like never before​.
+              Harmony Engine makes complex software easier to understand.
+              It offers a calm, read-only way to see how systems work, so everyone can participate in technical 
+              conversations with confidence.
             </p>
           </div>
 

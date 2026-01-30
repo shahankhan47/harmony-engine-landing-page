@@ -6,26 +6,26 @@ import styles from "./Timeline.module.css";
 
 const steps = [
   {
-    title: "Connect Your Codebase",
-    text: "Securely link your Git repo or upload a snapshot. HarmonyEngine ingests your source code and structure.",
+    title: "Bring your code into Harmony",
+    text: "Securely connect a repository or upload a snapshot. Harmony reads your software structure — nothing is changed.",
     video: "/videos/sample-1.mp4",
     poster: "/images/poster1.png"
   },
   {
-    title: "Map the System",
-    text: "AI auto‑discovers modules, services, and data flows, so you can see how everything fits together.",
+    title: "See how the system fits together",
+    text: "Harmony automatically maps modules, services, and data flows into a clear visual overview.",
     video: "/videos/sample-2.mp4",
     poster: "/images/poster2.png"
   },
   {
-    title: "Ask What Matters",
-    text: "Type questions in plain English— HarmonyEngine answers using your actual code.",
+    title: "Ask the questions that matter",
+    text: "Ask in plain English — Harmony answers using your real system, not guesses.",
     video: "/videos/sample-3.mp4",
     poster: "/images/poster3.png"
   },
   {
-    title: "Stay on Top of Changes",
-    text: "It summarizes code changes and pull requests, highlighting impact and areas to double‑check.",
+    title: "Understand changes before they surprise you",
+    text: "Harmony summarizes changes and pull requests, showing what changed and what it affects.",
     video: "/videos/sample-4.mp4",
     poster: "/images/poster4.png"
   },
@@ -49,7 +49,7 @@ export default function Timeline() {
 
   return (
     <section className={styles.wrapper} ref={ref}>
-      <h2 className={styles.heading}>How It Works</h2>
+      <h2 className={styles.heading}>From code to clarity — step by step</h2>
 
       <div className={styles.timeline}>
         {/* Vertical center line */}
