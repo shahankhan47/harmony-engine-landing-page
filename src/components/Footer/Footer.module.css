@@ -2,7 +2,7 @@
 .inner { display:flex; justify-content:space-between; align-items:center }
 .links { color: var(--muted) }
 
-.divider { border-top: 1px solid var(--border); margin-top: 10px }
+.divider { border-top: 1px solid var(--border); margin-top: 40px; }
 
 .top {
   display: flex;

@@ -9,25 +9,25 @@ const steps = [
     title: "Bring your code into Harmony",
     text: "Securely connect a repository or upload a snapshot. Harmony reads your software structure — nothing is changed.",
     video: "/videos/sample-1.mp4",
-    poster: "/images/poster1.png"
+    poster: "/images/logo-hd.png"
   },
   {
     title: "See how the system fits together",
     text: "Harmony automatically maps modules, services, and data flows into a clear visual overview.",
     video: "/videos/sample-2.mp4",
-    poster: "/images/poster2.png"
+    poster: "/images/logo-hd.png"
   },
   {
     title: "Ask the questions that matter",
     text: "Ask in plain English — Harmony answers using your real system, not guesses.",
     video: "/videos/sample-3.mp4",
-    poster: "/images/poster3.png"
+    poster: "/images/logo-hd.png"
   },
   {
     title: "Understand changes before they surprise you",
     text: "Harmony summarizes changes and pull requests, showing what changed and what it affects.",
     video: "/videos/sample-4.mp4",
-    poster: "/images/poster4.png"
+    poster: "/images/logo-hd.png"
   },
 ];
 
