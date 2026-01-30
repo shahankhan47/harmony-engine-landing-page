@@ -3,11 +3,11 @@
 import styles from "./Partners.module.css";
 
 const partners = [
-  "Which parts of the codebase run on legacy tech?",
-  "How tangled is our current architecture?",
-  "Where is the logic for pricing?",
-  "How long would it take for my team to implement this architecture?",
-  "Why am I getting this error?",
+  "Which parts of our system rely on older technology?",
+  "How complex is our current architecture?",
+  "Where does our pricing logic live?",
+  "How much effort would it take for our team to build this?",
+  "What might be causing this error?",
   "Why are my customers not able to see their purchase history ?",
 ];
 
@@ -15,7 +15,7 @@ export default function Partners() {
   return (
     <div className={styles.wrap}>
       <div className={styles.caption}>
-        Harmony reads your codebase and answers these questions in plain language – so leaders don’t need to read code.
+        Harmony understands your software and answers the questions people actually ask — in plain language, without needing to read code.
       </div>
 
       <div className={styles.marquee}>

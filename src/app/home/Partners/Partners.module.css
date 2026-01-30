@@ -1,5 +1,5 @@
 .wrap {
-  padding: 40px 0;
+  padding: 20px 0;
 }
 
 .caption {
@@ -42,7 +42,7 @@
   display: flex;
   width: calc(490px * 12);
   will-change: transform;
-  animation: partners-scroll 20s linear infinite;
+  animation: partners-scroll 55s linear infinite;
 }
 
 /* Each logo cell: 160px logo + 90px gap */

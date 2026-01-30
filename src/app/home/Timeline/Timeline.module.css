@@ -1,13 +1,13 @@
 /* Section wrapper */
 .wrapper {
-  padding: 50px 0;
+  padding: 120px 0 0 0;
   position: relative;
 }
 
 .heading {
   text-align: center;
   margin-bottom: 70px;
-  font-size: 36px;
+  font-size: 44px;
   font-weight: 700;
   color: var(--text);
 }
@@ -42,7 +42,7 @@
 .lineFill {
   width: 100%;
   height: 100%;
-  background: var(--color-primary);
+  background: #22c55e;
   transform-origin: top;
   transform: scaleY(0);
   border-radius: 3px;
@@ -61,7 +61,7 @@
 .dot {
   width: 18px;
   height: 18px;
-  background: var(--color-primary);
+  background: #22c55e;
   border-radius: 50%;
   border: 4px solid var(--bg);
   position: absolute;

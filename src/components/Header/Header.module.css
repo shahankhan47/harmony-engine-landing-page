@@ -81,22 +81,22 @@
 
 /* 🌟 Modern Get Started button with green glow */
 .cta {
-  background: var(--color-primary-strong);
-  color: var(--text);
-  border: none;
-  padding: 10px 18px;
-  border-radius: 14px;
-  font-weight: 600;
+  background: rgba(255, 255, 255, 0.06);
+  color: #f9fafb;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 14px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 18px rgba(88,169,66,0.25);
+  transition: background 0.2s ease;
 }
 
 .cta:hover {
-  transform: scale(1.05);
-  background: var(--color-primary-strong);
-  box-shadow: 0 8px 28px rgba(88,169,66,0.45);
-  border: 1px solid rgba(88,169,66,0.45);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .cta:active {

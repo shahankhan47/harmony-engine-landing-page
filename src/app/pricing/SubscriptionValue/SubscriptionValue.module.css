@@ -1,0 +1,59 @@
+.section {
+  text-align: center;
+  background: linear-gradient(180deg,#0000,#0000);
+}
+
+.heading {
+  font-size: 38px;
+  color: #f9fafb;
+  margin-bottom: 16px;
+}
+
+.text {
+  color: #9ca3af;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.text span {
+  color: #4ade80;
+  font-weight: 500;
+}
+
+.cards {
+  margin: 64px auto;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 32px;
+}
+
+.card {
+  background: linear-gradient(180deg, #020403 0%, #050705 100%);
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.card h4 {
+  color: #f9fafb;
+  margin: 12px 0 8px;
+}
+
+.card p {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.iconGreen { color:#4ade80 }
+.iconBlue { color:#60a5fa }
+.iconPurple { color:#c084fc }
+
+.footer {
+  color: #9ca3af;
+  font-size: 15px;
+  padding-bottom: 25px;
+}
+
+.footer span {
+  color: #4ade80;
+}
