@@ -48,7 +48,7 @@ export default function Timeline() {
   const lineOpacity = useTransform(smoothProgress, [0, 0.01, 0.02], [0, 0, 1]);
 
   return (
-    <section className={styles.wrapper} ref={ref}>
+    <section id="howItWorks" className={styles.wrapper} ref={ref}>
       <h2 className={styles.heading}>From code to clarity — step by step</h2>
 
       <div className={styles.timeline}>

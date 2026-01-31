@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -26,16 +27,16 @@ export default function Footer() {
           <div className={styles.columns}>
             <div className={styles.column}>
               <h4 className={styles.heading}>Quick Links</h4>
-              <a href="/">Home</a>
-              <a href="/get-started">How It Works</a>
-              <a href="/about">Success Stories</a>
+              <Link href="/">Home</Link>
+              <Link href="#howItWorks">How It Works</Link>
+              <Link href="/about#successStories">Success Stories</Link>
             </div>
 
             <div className={styles.column}>
               <h4 className={styles.heading}>Support</h4>
-              <a href="/contact">FAQ</a>
-              <a href="/">Privacy Policy</a>
-              <a href="/">Terms of Service</a>
+              <Link href="/pricing#faq">FAQ</Link>
+              <Link href="/">Privacy Policy</Link>
+              <Link href="/">Terms of Service</Link>
             </div>
           </div>
         </div>

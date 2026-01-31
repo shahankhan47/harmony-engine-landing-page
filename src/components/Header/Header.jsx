@@ -21,15 +21,15 @@ export default function Header() {
           </div>
 
           <nav className={styles.navLeft}>
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
           </nav>
         </div>
 
         <div className={styles.right}>
           <nav className={styles.navRight}>
-            <a href="/about">About</a>
-            <a href="/pricing">Pricing</a>
-            <a href="/contact">Contact</a>
+            <Link href="/about">About</Link>
+            <Link href="/pricing">Pricing</Link>
+            <Link href="/contact">Contact</Link>
             <Link href="https://app.harmonyengine.ai" className={styles.ctaLink}>
               <button className={styles.cta}>Upload your project</button>
             </Link>

@@ -35,7 +35,7 @@ const FAQ_ITEMS = [
 
 export default function FAQ() {
   return (
-    <section className={styles.section}>
+    <section id="faq" className={styles.section}>
       <div className={styles.inner}>
         <h2 className={styles.heading}>Common questions</h2>
         <p className={styles.subheading}>

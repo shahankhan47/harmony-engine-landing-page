@@ -2,7 +2,7 @@ import styles from "./BuiltForPeople.module.css";
 
 export default function BuiltForPeople() {
   return (
-    <section className={styles.section}>
+    <section id="successStories" className={styles.section}>
       <div className={styles.container}>
         {/* LEFT */}
         <div className={styles.left}>
