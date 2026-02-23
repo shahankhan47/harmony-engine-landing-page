@@ -1,9 +1,9 @@
-import AskAnything from './home/AskAnything/AskAnything'
-import BigPicture from './home/BigPicture/BigPicture'
+import CostSection from './home/CostSection/CostSection'
+import FinalCTASection from './home/FinalCTASection/FinalCTASection'
+import GainSection from './home/GainSection/GainSection'
 import HeroSection from './home/HeroSection/HeroSection'
-import Partners from './home/Partners/Partners'
-import ReadyCTA from './home/ReadyCTA/ReadyCTA'
-import Timeline from './home/Timeline/Timeline'
+import HowItWorksSection from './home/HowItWorksSection/HowItWorksSection'
+import SituationSection from './home/SituationSection/SituationSection'
 
 export default function Home() {
   return (
@@ -12,19 +12,19 @@ export default function Home() {
         <HeroSection />
       </section>
       <section>
-        <Partners />
+        <SituationSection />
       </section>
       <section>
-        <AskAnything />
+        <CostSection />
       </section>
       <section>
-        <BigPicture />
+        <HowItWorksSection />
       </section>
       <section>
-        <Timeline />
+        <GainSection />
       </section>
       <section>
-        <ReadyCTA />
+        <FinalCTASection />
       </section>
     </div>
   )

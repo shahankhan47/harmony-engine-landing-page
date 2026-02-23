@@ -1,0 +1,159 @@
+.section {
+  padding-top: 96px;
+  padding-bottom: 96px;
+  background-color: #ffffff;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 48px;
+  padding-right: 48px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 48px;
+  color: var(--color-text-primary);
+}
+
+.carouselWrapper {
+  position: relative;
+}
+
+.carouselContainer {
+  overflow: visible;
+}
+
+.track {
+  display: flex;
+  gap: 24px;
+}
+
+.card {
+  width: calc(33.333% - 16px);
+  flex-shrink: 0;
+}
+
+.cardInner {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 32px;
+  height: 475px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 300ms ease;
+}
+
+.cardInner:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.number {
+  width: 48px;
+  height: 48px;
+
+  background-color: var(--color-primary);
+  color: #ffffff;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  margin-right: 16px;
+
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+.cardHeader h3 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.cardBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardBody p {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-bottom: 16px;
+}
+
+.cardBody ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 24px;
+}
+
+.cardBody li {
+  display: flex;
+  align-items: flex-start;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.cardBody li i {
+  color: var(--color-primary);
+  margin-right: 12px;
+  margin-top: 6px;
+  font-size: 6px;
+}
+
+.callout {
+  margin-top: auto;
+  background-color: var(--color-neutral);
+  border-left: 4px solid var(--color-primary);
+  padding: 16px;
+  border-radius: 0 8px 8px 0;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: #ffffff;
+  border: 2px solid var(--color-border);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms ease;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+}
+
+.navButton:hover {
+  background-color: var(--color-neutral);
+  border-color: var(--color-primary);
+}
+
+.prev {
+  left: -16px;
+}
+
+.next {
+  right: -16px;
+}

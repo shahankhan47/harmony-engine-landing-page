@@ -1,50 +1,30 @@
-import Link from 'next/link'
-import styles from './Footer.module.css'
+import styles from "./Footer.module.css";
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
-      <div className="container">
-        <div className={styles.top}>
-          {/* Left */}
-          <div className={styles.about}>
-            <h3 className={styles.title}>
-              Harmony Engine
-              <img
-                src="/svg/logo-black.svg"
-                alt=""
-                className={styles.titleIcon}
-              />
-            </h3>
-            <p className={styles.text}>
-              Harmony Engine makes complex software easier to understand.
-              It offers a calm, read-only way to see how systems work, so everyone can participate in technical 
-              conversations with confidence.
-            </p>
-          </div>
-
-          {/* Right */}
-          <div className={styles.columns}>
-            <div className={styles.column}>
-              <h4 className={styles.heading}>Quick Links</h4>
-              <Link href="/">Home</Link>
-              <Link href="#howItWorks">How It Works</Link>
-              <Link href="/about#successStories">Success Stories</Link>
+    <footer id="footer" className={styles.footer}>
+      <div className={styles.container}>
+        <div className={styles.inner}>
+          {/* Brand */}
+          <div className={styles.brand}>
+            <div className={styles.logoBox}>
+              <i className={`fa-solid fa-cube ${styles.logoIcon}`} />
             </div>
 
-            <div className={styles.column}>
-              <h4 className={styles.heading}>Support</h4>
-              <Link href="/pricing#faq">FAQ</Link>
-              <Link href="/">Privacy Policy</Link>
-              <Link href="/">Terms of Service</Link>
-            </div>
+            <span className={styles.brandText}>
+              HarmonyEngine
+            </span>
           </div>
-        </div>
-        <div className={styles.divider} />
-        <div className={styles.bottom}>
-          © {new Date().getFullYear()} zpqv Inc. All rights reserved.
+
+          {/* Links */}
+          <div className={styles.links}>
+            <a href="#" className={styles.link}>Company</a>
+            <a href="#" className={styles.link}>Privacy</a>
+            <a href="#" className={styles.link}>Terms</a>
+            <a href="#" className={styles.link}>Contact</a>
+          </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }
