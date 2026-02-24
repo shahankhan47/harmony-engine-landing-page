@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -8,7 +9,13 @@ export default function Footer() {
           {/* Brand */}
           <div className={styles.brand}>
             <div className={styles.logoBox}>
-              <i className={`fa-solid fa-cube ${styles.logoIcon}`} />
+              <Image
+                src="/svg/logo-black.svg"
+                alt="Logo"
+                width={14}
+                height={14}
+                className={styles.logoIcon}
+              />
             </div>
 
             <span className={styles.brandText}>

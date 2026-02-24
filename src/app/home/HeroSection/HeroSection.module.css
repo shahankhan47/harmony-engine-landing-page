@@ -151,6 +151,38 @@
   line-height: 1.6;
 }
 
+.statusMessage {
+  margin-top: 10px;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: fadeIn 0.2s ease;
+}
+
+.statusSuccess {
+  background: #e8f7ee;
+  color: #1f7a3f;
+  border: 1px solid #b7e4c7;
+}
+
+.statusError {
+  background: #fdeaea;
+  color: #b42318;
+  border: 1px solid #f5c2c7;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 1200px) {
   .layout {
     gap: 2rem;

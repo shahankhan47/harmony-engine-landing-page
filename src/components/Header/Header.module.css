@@ -32,10 +32,7 @@
 .logoBox {
   width: 2rem;
   height: 2rem;
-
-  background-color: var(--color-primary);
   border-radius: 0.25rem;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,9 +41,9 @@
 }
 
 .logoIcon {
-  color: #ffffff;
-  font-size: 0.875rem;
-  line-height: 1;
+  width: 5rem;
+  height: 5rem;
+  object-fit: contain;
 }
 
 .brandText {
