@@ -83,13 +83,13 @@ export default function HowItWorksSection() {
             </div>
           </div>
 
-          <button className={`${styles.navButton} ${styles.prev}`}>
+          {/* <button className={`${styles.navButton} ${styles.prev}`}>
             <i className="fa-solid fa-chevron-left" />
           </button>
 
           <button className={`${styles.navButton} ${styles.next}`}>
             <i className="fa-solid fa-chevron-right" />
-          </button>
+          </button> */}
         </div>
       </div>
     </section>

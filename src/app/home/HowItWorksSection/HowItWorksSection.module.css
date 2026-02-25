@@ -157,8 +157,10 @@
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1200px) {
-  .card {
-    flex: 0 0 calc(50% - 0.75rem);
+  .cardInner {
+    min-height: 30rem;
+    height: auto;
+    padding: 1.5rem;
   }
 }
 
@@ -211,6 +213,7 @@
   }
 
   .cardInner {
+    height: auto;
     padding: 1.5rem;
   }
 }
