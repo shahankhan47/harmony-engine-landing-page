@@ -19,7 +19,7 @@ export default function FinalCTASection() {
 
           <div className={styles.actions}>
             <button className={styles.button} onClick={() => setIsModalOpen(true)}>
-              Book Your 15-Minute Demo
+              Join Waitlist
             </button>
           </div>
         </div>

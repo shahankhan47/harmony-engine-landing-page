@@ -32,7 +32,7 @@ export default function Header() {
 
           <div className={styles.actions}>
             <button className={styles.ctaButton}  onClick={() => setIsModalOpen(true)}>
-              Request Demo
+              Join Waitlist
             </button>
           </div>
         </div>

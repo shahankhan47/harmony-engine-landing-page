@@ -56,7 +56,7 @@ export default function HeroSection() {
                   className={styles.ctaButton}
                   onClick={() => setIsModalOpen(true)}
                 >
-                  Book a 15-Minute Demo
+                  Join Waitlist
                 </button>
               </div>
             </div>

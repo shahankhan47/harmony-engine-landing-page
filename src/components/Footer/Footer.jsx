@@ -24,12 +24,12 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          <div className={styles.links}>
+          {/* <div className={styles.links}>
             <a href="#" className={styles.link}>Company</a>
             <a href="#" className={styles.link}>Privacy</a>
             <a href="#" className={styles.link}>Terms</a>
             <a href="#" className={styles.link}>Contact</a>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>
