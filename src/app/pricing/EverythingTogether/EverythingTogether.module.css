@@ -1,0 +1,42 @@
+.section {
+  padding: 120px 24px;
+  text-align: center;
+  background: linear-gradient(180deg,#0000,#0000);
+}
+
+.heading {
+  font-size: 40px;
+  color: #f9fafb;
+  margin-bottom: 12px;
+}
+
+.subheading {
+  color: #9ca3af;
+  margin-bottom: 64px;
+}
+
+.cards {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 32px;
+}
+
+.card {
+  background: linear-gradient(180deg,#050705,#020403);
+  border-radius: 16px;
+  padding: 28px;
+  text-align: left;
+}
+
+.card h4 {
+  color: #f9fafb;
+  margin-bottom: 12px;
+}
+
+.card li {
+  color: #9ca3af;
+  font-size: 14px;
+  margin-bottom: 8px;
+}

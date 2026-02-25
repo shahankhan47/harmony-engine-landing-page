@@ -1,41 +1,48 @@
-"use client"
-import styles from './Header.module.css'
-import { useState, useEffect } from 'react'
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import styles from "./Header.module.css";
+
+import DemoModal from "../DemoModal/DemoModal";
+import DemoForm from "../DemoForm/DemoForm";
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.shrink : ''}`}>
-      <div className={styles.inner + ' container'}>
-        <div className={styles.left}>
-          <div className={styles.logo}>
-            <img src="/svg/logo-black.svg" alt="Harmony Engine Logo" />
+    <>
+      <header id="header" className={styles.header}>
+        <div className={styles.container}>
+          <div className={styles.brand}>
+            <div className={styles.logoBox}>
+              <Image
+                src="/svg/logo-black.svg"
+                alt="Logo"
+                width={14}
+                height={14}
+                className={styles.logoIcon}
+              />
+            </div>
+
+            <span className={styles.brandText}>
+              HarmonyEngine
+            </span>
           </div>
 
-          <nav className={styles.navLeft}>
-            <a href="/">Home</a>
-          </nav>
+          <div className={styles.actions}>
+            <button className={styles.ctaButton}  onClick={() => setIsModalOpen(true)}>
+              Join Waitlist
+            </button>
+          </div>
         </div>
-
-        <div className={styles.right}>
-          <nav className={styles.navRight}>
-            <a href="/about">About</a>
-            <a href="/pricing">Pricing</a>
-            <a href="/contact">Contact</a>
-            <Link href="https://app.harmonyengine.ai" className={styles.ctaLink}>
-              <button className={styles.cta}>Upload your project</button>
-            </Link>
-          </nav>
-        </div>
-      </div>
-    </header>
-  )
+      </header>
+      <DemoModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        <DemoForm onSuccess={() => setIsModalOpen(false)} />
+      </DemoModal>
+    </>
+  );
 }
