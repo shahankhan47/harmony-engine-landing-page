@@ -14,7 +14,7 @@ export const metadata = {
   },
 }
 
-const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.NEXT_PUBLIC_HE_ENVIRONMENT === "production";
 
 export default function RootLayout({ children }) {
   return (
@@ -49,6 +49,34 @@ export default function RootLayout({ children }) {
             {children}
           </main>
         <Footer />
+        {isProd && (
+          <>
+            {/* LinkedIn Insight Tag */}
+            <Script id="linkedin-partner-init" strategy="afterInteractive">
+              {`
+                _linkedin_partner_id = "8872668";
+                window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+                window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+              `}
+            </Script>
+
+            <Script
+              id="linkedin-insight"
+              src="https://snap.licdn.com/li.lms-analytics/insight.min.js"
+              strategy="afterInteractive"
+            />
+
+            <noscript>
+              <img
+                height="1"
+                width="1"
+                style={{ display: "none" }}
+                alt=""
+                src="https://px.ads.linkedin.com/collect/?pid=8872668&fmt=gif"
+              />
+            </noscript>
+          </>
+        )}
       </body>
     </html>
   );

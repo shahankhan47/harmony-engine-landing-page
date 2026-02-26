@@ -35,6 +35,7 @@ jobs:
           NEXT_PUBLIC_HE_API_KEY: ${{ secrets.NEXT_PUBLIC_HE_API_KEY }}
           NEXT_PUBLIC_HE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_HE_PROJECT_ID }}
           NEXT_PUBLIC_HE_EMAIL: ${{ secrets.NEXT_PUBLIC_HE_EMAIL }}
+          NEXT_PUBLIC_HE_ENVIRONMENT: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
 
       # ✅ Oryx is skipped entirely
       - name: Deploy to Azure Static Web Apps
